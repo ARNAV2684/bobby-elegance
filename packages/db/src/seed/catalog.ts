@@ -67,8 +67,7 @@ export const CATEGORIES: Category[] = [
     id: 'cat-kurti',
     slug: 'kurti-sets',
     name: 'Kurti Sets',
-    description:
-      'Relaxed, refined, and endlessly wearable. Our most repeat-purchased category.',
+    description: 'Relaxed, refined, and endlessly wearable. Our most repeat-purchased category.',
     parentSlug: null,
     imageUrl: '/images/collections/kurti-sets.jpg',
     position: 6,
@@ -636,7 +635,9 @@ function buildProduct(spec: ProductSpec, index: number): Product {
     images: buildImages(spec),
     variants: buildVariants(spec),
     careInstructions: CARE,
-    metaTitle: `${spec.title} — ${spec.fabric} | Bobby Elegance`,
+    // The brand suffix is added by the layout's title template — including it
+    // here too would render "… | Bobby Elegance | Bobby Elegance".
+    metaTitle: `${spec.title} — ${spec.fabric}`,
     metaDescription: spec.summary,
     createdAt,
   };

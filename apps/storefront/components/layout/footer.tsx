@@ -16,13 +16,13 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-20 bg-maroon-deep text-cream">
+    <footer className="bg-maroon-deep text-cream mt-20">
       <Container wide>
         <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Logo tone="cream" />
-            <p className="mt-4 max-w-xs text-xs leading-relaxed text-cream/65">{FOOTER_BLURB}</p>
+            <p className="text-cream/65 mt-4 max-w-xs text-xs leading-relaxed">{FOOTER_BLURB}</p>
 
             <div className="mt-5 flex items-center gap-3">
               <a
@@ -30,7 +30,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Bobby Elegance on Facebook"
-                className="flex size-9 items-center justify-center rounded-full border border-cream/20 transition-colors hover:border-gold hover:text-gold"
+                className="border-cream/20 hover:border-gold hover:text-gold flex size-9 items-center justify-center rounded-full border transition-colors"
               >
                 <FacebookIcon className="size-4" />
               </a>
@@ -39,7 +39,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Bobby Elegance on Instagram"
-                className="flex size-9 items-center justify-center rounded-full border border-cream/20 transition-colors hover:border-gold hover:text-gold"
+                className="border-cream/20 hover:border-gold hover:text-gold flex size-9 items-center justify-center rounded-full border transition-colors"
               >
                 <InstagramIcon className="size-4" />
               </a>
@@ -48,7 +48,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Message Bobby Elegance on WhatsApp"
-                className="flex size-9 items-center justify-center rounded-full border border-cream/20 transition-colors hover:border-gold hover:text-gold"
+                className="border-cream/20 hover:border-gold hover:text-gold flex size-9 items-center justify-center rounded-full border transition-colors"
               >
                 <WhatsAppIcon className="size-4" />
               </a>
@@ -57,7 +57,7 @@ export function Footer() {
 
           {/* Quick links */}
           <nav aria-labelledby="footer-quick">
-            <h2 id="footer-quick" className="label-caps mb-4 text-gold">
+            <h2 id="footer-quick" className="label-caps text-gold mb-4">
               {FOOTER_NAV.quickLinks.title}
             </h2>
             <ul className="flex flex-col gap-2.5">
@@ -65,7 +65,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-xs text-cream/70 transition-colors hover:text-gold"
+                    className="text-cream/70 hover:text-gold text-xs transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -76,7 +76,7 @@ export function Footer() {
 
           {/* Customer care */}
           <nav aria-labelledby="footer-care">
-            <h2 id="footer-care" className="label-caps mb-4 text-gold">
+            <h2 id="footer-care" className="label-caps text-gold mb-4">
               {FOOTER_NAV.customerCare.title}
             </h2>
             <ul className="flex flex-col gap-2.5">
@@ -84,7 +84,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-xs text-cream/70 transition-colors hover:text-gold"
+                    className="text-cream/70 hover:text-gold text-xs transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -95,19 +95,19 @@ export function Footer() {
 
           {/* Store locator */}
           <div>
-            <h2 className="label-caps mb-4 text-gold">Store Locator</h2>
-            <p className="text-xs text-cream/70">{STORES.length} stores in Mira Road</p>
-            <p className="mt-1 text-xs text-cream/50">{STORES[0]?.hours}</p>
+            <h2 className="label-caps text-gold mb-4">Store Locator</h2>
+            <p className="text-cream/70 text-xs">{STORES.length} stores in Mira Road</p>
+            <p className="text-cream/50 mt-1 text-xs">{STORES[0]?.hours}</p>
             <Link
               href="/stores"
-              className="mt-4 inline-flex items-center gap-2 border border-gold/40 px-4 py-2.5 text-[0.625rem] tracking-[0.16em] uppercase text-gold transition-colors hover:bg-gold hover:text-maroon-deep"
+              className="border-gold/40 text-gold hover:bg-gold hover:text-maroon-deep mt-4 inline-flex items-center gap-2 border px-4 py-2.5 text-[0.625rem] uppercase tracking-[0.16em] transition-colors"
             >
               <MapPin className="size-3.5" />
               Find a store
             </Link>
             <a
               href={`tel:+91${BRAND.contact.phone}`}
-              className="mt-3 block text-sm text-cream transition-colors hover:text-gold"
+              className="text-cream hover:text-gold mt-3 block text-sm transition-colors"
             >
               {BRAND.contact.phoneDisplay}
             </a>
@@ -115,8 +115,8 @@ export function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h2 className="label-caps mb-4 text-gold">{NEWSLETTER.title}</h2>
-            <p className="text-xs leading-relaxed text-cream/70">{NEWSLETTER.body}</p>
+            <h2 className="label-caps text-gold mb-4">{NEWSLETTER.title}</h2>
+            <p className="text-cream/70 text-xs leading-relaxed">{NEWSLETTER.body}</p>
             <form className="mt-4 flex" action="/api/newsletter" method="post">
               <label htmlFor="newsletter-email" className="sr-only">
                 Email address
@@ -127,12 +127,12 @@ export function Footer() {
                 type="email"
                 required
                 placeholder={NEWSLETTER.placeholder}
-                className="min-w-0 flex-1 border border-cream/20 bg-transparent px-3 py-2.5 text-xs text-cream placeholder:text-cream/40 focus:border-gold focus:outline-none"
+                className="border-cream/20 text-cream placeholder:text-cream/40 focus:border-gold min-w-0 flex-1 border bg-transparent px-3 py-2.5 text-xs focus:outline-none"
               />
               <button
                 type="submit"
                 aria-label="Subscribe to the newsletter"
-                className="flex size-10 shrink-0 items-center justify-center bg-gold text-maroon-deep transition-colors hover:bg-gold-light"
+                className="bg-gold text-maroon-deep hover:bg-gold-light flex size-10 shrink-0 items-center justify-center transition-colors"
               >
                 <Send className="size-4" />
               </button>
@@ -141,20 +141,20 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col-reverse items-center justify-between gap-4 border-t border-cream/10 py-6 sm:flex-row">
-          <p className="text-[0.625rem] tracking-wide text-cream/50">
+        <div className="border-cream/10 flex flex-col-reverse items-center justify-between gap-4 border-t py-6 sm:flex-row">
+          <p className="text-cream/50 text-[0.625rem] tracking-wide">
             © {year} {BRAND.name}. All Rights Reserved.
           </p>
 
           <div className="flex items-center gap-3">
-            <span className="text-[0.625rem] tracking-[0.14em] uppercase text-cream/40">
+            <span className="text-cream/40 text-[0.625rem] uppercase tracking-[0.14em]">
               We accept
             </span>
             <div className="flex items-center gap-2">
               {PAYMENT_METHODS.map((method) => (
                 <span
                   key={method}
-                  className="rounded-[2px] border border-cream/15 bg-cream/5 px-2 py-1 text-[0.5625rem] tracking-wide text-cream/70"
+                  className="border-cream/15 bg-cream/5 text-cream/70 rounded-[2px] border px-2 py-1 text-[0.5625rem] tracking-wide"
                 >
                   {method}
                 </span>

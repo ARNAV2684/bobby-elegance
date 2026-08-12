@@ -194,12 +194,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgb(255 255 255 / 0.35),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.35), transparent);
   transform: translateX(-120%) skewX(-20deg);
   pointer-events: none;
 }

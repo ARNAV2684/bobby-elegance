@@ -7,21 +7,25 @@ export { CATEGORIES, COLLECTIONS, PRODUCTS } from './seed/catalog';
 export { COUPONS, HERO_SLIDES } from './seed/marketing';
 export { CUSTOMERS, ORDERS, STAFF } from './seed/orders';
 
-let instance: Repository | null = null;
-
 /**
- * The repository singleton.
+ * The singleton is parked on globalThis rather than in a module-level variable.
  *
- * Reads DATA_DRIVER to decide which implementation to hand back:
- *   unset / "mock" -> MockRepository  (default; no configuration needed)
- *   "prisma"       -> PrismaRepository (requires DATABASE_URL)
+ * Next.js bundles route handlers and page components into separate module
+ * graphs, so each would otherwise get its own copy of this module — and its own
+ * MockRepository. An order written by POST /api/checkout would then be invisible
+ * to the confirmation page rendering in a different bundle, which shows up as a
+ * 404 immediately after a successful checkout.
  *
- * Adding Postgres later means implementing `Repository` against Prisma and
- * extending the switch below. Nothing that *calls* getRepository() changes.
+ * Hanging it off globalThis gives one instance per Node process. This is the
+ * same pattern the Prisma docs prescribe for the Prisma client in development,
+ * and it also survives hot-module reloads, so in-memory orders are not wiped
+ * every time a file is saved.
  */
-export function getRepository(): Repository {
-  if (instance) return instance;
+const GLOBAL_KEY = Symbol.for('bobby.repository');
 
+type GlobalWithRepo = typeof globalThis & { [GLOBAL_KEY]?: Repository };
+
+function createRepository(): Repository {
   const driver = process.env.DATA_DRIVER?.toLowerCase() ?? 'mock';
 
   switch (driver) {
@@ -34,12 +38,26 @@ export function getRepository(): Repository {
       );
     case 'mock':
     default:
-      instance = new MockRepository();
-      return instance;
+      return new MockRepository();
   }
+}
+
+/**
+ * Resolve the repository.
+ *
+ *   DATA_DRIVER unset / "mock" -> MockRepository (default; no configuration)
+ *   DATA_DRIVER=prisma         -> PrismaRepository (requires DATABASE_URL)
+ *
+ * Adding Postgres later means implementing `Repository` against Prisma and
+ * extending the switch above. Nothing that *calls* getRepository() changes.
+ */
+export function getRepository(): Repository {
+  const g = globalThis as GlobalWithRepo;
+  g[GLOBAL_KEY] ??= createRepository();
+  return g[GLOBAL_KEY];
 }
 
 /** Test helper — drops the cached singleton so each test starts clean. */
 export function resetRepository(): void {
-  instance = null;
+  delete (globalThis as GlobalWithRepo)[GLOBAL_KEY];
 }

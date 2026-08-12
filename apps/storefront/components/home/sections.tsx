@@ -55,7 +55,7 @@ export function CollectionTiles({ collections }: { collections: Category[] }) {
             <Link
               key={c.id}
               href={`/collections/${c.slug}`}
-              className="group relative aspect-4/5 overflow-hidden bg-maroon-deep"
+              className="aspect-4/5 bg-maroon-deep group relative overflow-hidden"
             >
               <Image
                 src={c.imageUrl}
@@ -64,16 +64,16 @@ export function CollectionTiles({ collections }: { collections: Category[] }) {
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-maroon-deep/90 via-maroon-deep/25 to-transparent" />
+              <div className="from-maroon-deep/90 via-maroon-deep/25 absolute inset-0 bg-gradient-to-t to-transparent" />
 
               <div className="absolute inset-x-0 bottom-0 p-5">
-                <h3 className="font-display text-xl leading-tight text-cream">
+                <h3 className="font-display text-cream text-xl leading-tight">
                   {c.name.replace(' Collection', '')}
-                  <span className="block text-sm font-normal tracking-[0.2em] text-cream/80 uppercase">
+                  <span className="text-cream/80 block text-sm font-normal uppercase tracking-[0.2em]">
                     Collection
                   </span>
                 </h3>
-                <span className="label-caps mt-3 inline-block text-gold transition-transform duration-300 group-hover:translate-x-1">
+                <span className="label-caps text-gold mt-3 inline-block transition-transform duration-300 group-hover:translate-x-1">
                   Shop now →
                 </span>
               </div>
@@ -93,9 +93,9 @@ export function StoryPanel() {
   return (
     <section aria-labelledby="story-heading" className="pb-14">
       <Container wide>
-        <div className="grid overflow-hidden rounded-sm border border-line bg-card lg:grid-cols-[1fr_1.15fr_0.9fr]">
+        <div className="border-line bg-card grid overflow-hidden rounded-sm border lg:grid-cols-[1fr_1.15fr_0.9fr]">
           {/* Founder portrait */}
-          <div className="relative min-h-72 bg-cream-panel lg:min-h-0">
+          <div className="bg-cream-panel relative min-h-72 lg:min-h-0">
             <Image
               src="/images/brand/founder.jpg"
               alt={`${BRAND.founder.name}, founder of ${BRAND.name}`}
@@ -108,11 +108,11 @@ export function StoryPanel() {
           {/* Copy */}
           <div className="flex flex-col justify-center gap-4 p-8 lg:p-10">
             <span className="label-caps text-gold-muted">{STORY.eyebrow}</span>
-            <h2 id="story-heading" className="font-display text-3xl tracking-wide text-maroon">
+            <h2 id="story-heading" className="font-display text-maroon text-3xl tracking-wide">
               {STORY.heading}
             </h2>
             <Ornament className="justify-start" />
-            <p className="text-sm leading-relaxed text-ink-soft">{STORY.body}</p>
+            <p className="text-ink-soft text-sm leading-relaxed">{STORY.body}</p>
             <Link
               href={STORY.ctaHref}
               className={buttonClasses({ variant: 'primary', className: 'mt-2 self-start' })}
@@ -122,15 +122,15 @@ export function StoryPanel() {
           </div>
 
           {/* Trust list */}
-          <ul className="divide-y divide-line bg-cream-panel/60">
+          <ul className="divide-line bg-cream-panel/60 divide-y">
             {TRUST_POINTS.map((point) => (
               <li key={point.subtitle} className="flex items-center gap-3.5 px-6 py-[1.15rem]">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-gold-muted/40 text-gold-muted">
+                <span className="border-gold-muted/40 text-gold-muted flex size-9 shrink-0 items-center justify-center rounded-full border">
                   <Icon name={point.icon} className="size-4" />
                 </span>
                 <span className="leading-tight">
-                  <span className="block text-sm font-medium text-ink">{point.title}</span>
-                  <span className="block text-xs text-muted">{point.subtitle}</span>
+                  <span className="text-ink block text-sm font-medium">{point.title}</span>
+                  <span className="text-muted block text-xs">{point.subtitle}</span>
                 </span>
               </li>
             ))}
@@ -147,17 +147,17 @@ export function StoryPanel() {
 
 export function UspStrip() {
   return (
-    <section aria-label="Why shop with us" className="border-y border-line bg-cream-panel/40">
+    <section aria-label="Why shop with us" className="border-line bg-cream-panel/40 border-y">
       <Container wide>
-        <ul className="grid grid-cols-2 divide-line sm:grid-cols-3 lg:grid-cols-6 lg:divide-x">
+        <ul className="divide-line grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 lg:divide-x">
           {USP_STRIP.map((usp) => (
             <li key={usp.title} className="flex items-center gap-3 px-4 py-5">
-              <Icon name={usp.icon} className="size-6 shrink-0 text-gold-muted" />
+              <Icon name={usp.icon} className="text-gold-muted size-6 shrink-0" />
               <span className="leading-tight">
-                <span className="block text-[0.6875rem] font-medium tracking-wide text-ink uppercase">
+                <span className="text-ink block text-[0.6875rem] font-medium uppercase tracking-wide">
                   {usp.title}
                 </span>
-                <span className="block text-[0.625rem] text-muted">{usp.subtitle}</span>
+                <span className="text-muted block text-[0.625rem]">{usp.subtitle}</span>
               </span>
             </li>
           ))}
@@ -200,10 +200,7 @@ export function ProductRail({
             className="items-start"
             as="h2"
           />
-          <Link
-            href={viewAllHref}
-            className={buttonClasses({ variant: 'outline', size: 'sm' })}
-          >
+          <Link href={viewAllHref} className={buttonClasses({ variant: 'outline', size: 'sm' })}>
             View all
           </Link>
         </div>
@@ -229,7 +226,8 @@ export function ProductRail({
 // ---------------------------------------------------------------------------
 
 const OCCASION_ICONS: Record<string, string> = {
-  wedding: 'M12 3l2.09 4.24 4.68.68-3.39 3.3.8 4.66L12 13.67l-4.18 2.2.8-4.65-3.39-3.3 4.68-.68L12 3z',
+  wedding:
+    'M12 3l2.09 4.24 4.68.68-3.39 3.3.8 4.66L12 13.67l-4.18 2.2.8-4.65-3.39-3.3 4.68-.68L12 3z',
   festive: 'M12 2a5 5 0 015 5c0 2.5-2 4-2 6H9c0-2-2-3.5-2-6a5 5 0 015-5zM9 16h6v2H9v-2z',
   eid: 'M16 3a9 9 0 100 18 7 7 0 010-18z',
   party: 'M8 3h8l-1 7a3 3 0 01-6 0L8 3zm4 10v7m-3 0h6',
@@ -249,10 +247,12 @@ export function OccasionGrid({ collections }: { collections: Category[] }) {
           className="mb-8"
         />
 
-        <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-3 lg:grid-cols-5">
+        <ul className="border-line bg-line grid grid-cols-2 gap-px overflow-hidden rounded-sm border sm:grid-cols-3 lg:grid-cols-5">
           {occasions.map(([key, label]) => {
             const collection = collections.find((c) =>
-              c.slug.startsWith(key === 'party' ? 'party-wear' : key === 'daily' ? 'daily-wear' : key),
+              c.slug.startsWith(
+                key === 'party' ? 'party-wear' : key === 'daily' ? 'daily-wear' : key,
+              ),
             );
             const href = collection ? `/collections/${collection.slug}` : `/collections/womens`;
 
@@ -260,7 +260,7 @@ export function OccasionGrid({ collections }: { collections: Category[] }) {
               <li key={key}>
                 <Link
                   href={href}
-                  className="group flex h-full flex-col items-center justify-center gap-3 bg-card px-4 py-8 transition-colors hover:bg-cream-panel/60"
+                  className="bg-card hover:bg-cream-panel/60 group flex h-full flex-col items-center justify-center gap-3 px-4 py-8 transition-colors"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -269,16 +269,16 @@ export function OccasionGrid({ collections }: { collections: Category[] }) {
                     strokeWidth="1.2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="size-8 text-gold-muted transition-transform duration-300 group-hover:-translate-y-0.5"
+                    className="text-gold-muted size-8 transition-transform duration-300 group-hover:-translate-y-0.5"
                     aria-hidden="true"
                   >
                     <path d={OCCASION_ICONS[key] ?? OCCASION_ICONS.daily!} />
                   </svg>
                   <span className="text-center leading-tight">
-                    <span className="block text-xs font-medium tracking-[0.14em] text-ink uppercase">
+                    <span className="text-ink block text-xs font-medium uppercase tracking-[0.14em]">
                       {label}
                     </span>
-                    <span className="block text-[0.625rem] tracking-wide text-muted uppercase">
+                    <span className="text-muted block text-[0.625rem] uppercase tracking-wide">
                       Collection
                     </span>
                   </span>
@@ -305,27 +305,33 @@ export function PromoBand() {
           <div>
             <p className="font-display text-2xl leading-tight tracking-wide">
               Celebrate Every Moment
-              <span className="block text-gold">In Elegance</span>
+              <span className="text-gold block">In Elegance</span>
             </p>
           </div>
 
-          <Link href="/collections/new-arrivals" className="group md:border-l md:border-cream/15 md:pl-6">
-            <span className="block font-display text-lg text-cream">New Arrivals</span>
-            <span className="label-caps text-gold transition-transform group-hover:translate-x-1 inline-block">
+          <Link
+            href="/collections/new-arrivals"
+            className="md:border-cream/15 group md:border-l md:pl-6"
+          >
+            <span className="font-display text-cream block text-lg">New Arrivals</span>
+            <span className="label-caps text-gold inline-block transition-transform group-hover:translate-x-1">
               Shop now →
             </span>
           </Link>
 
-          <Link href="/collections/wedding" className="group md:border-l md:border-cream/15 md:pl-6">
-            <span className="block font-display text-lg text-cream">Wedding Special</span>
-            <span className="label-caps text-gold transition-transform group-hover:translate-x-1 inline-block">
+          <Link
+            href="/collections/wedding"
+            className="md:border-cream/15 group md:border-l md:pl-6"
+          >
+            <span className="font-display text-cream block text-lg">Wedding Special</span>
+            <span className="label-caps text-gold inline-block transition-transform group-hover:translate-x-1">
               Explore now →
             </span>
           </Link>
 
-          <div className="flex items-center gap-3 md:border-l md:border-cream/15 md:pl-6">
-            <span className="font-display text-5xl leading-none text-gold">20</span>
-            <span className="text-[0.625rem] leading-tight tracking-[0.16em] text-cream/80 uppercase">
+          <div className="md:border-cream/15 flex items-center gap-3 md:border-l md:pl-6">
+            <span className="font-display text-gold text-5xl leading-none">20</span>
+            <span className="text-cream/80 text-[0.625rem] uppercase leading-tight tracking-[0.16em]">
               Years
               <br />
               of Legacy
@@ -351,18 +357,18 @@ export function InstagramStrip({ products }: { products: Product[] }) {
       <Container wide>
         <div className="flex flex-col items-center gap-6 py-10 lg:flex-row lg:justify-between">
           <div className="flex items-center gap-4">
-            <span className="flex size-12 items-center justify-center rounded-full border border-gold/40 text-gold">
+            <span className="border-gold/40 text-gold flex size-12 items-center justify-center rounded-full border">
               <InstagramIcon className="size-5" />
             </span>
             <div>
-              <h2 id="instagram-heading" className="text-sm tracking-[0.16em] text-cream uppercase">
+              <h2 id="instagram-heading" className="text-cream text-sm uppercase tracking-[0.16em]">
                 Follow us on Instagram
               </h2>
               <a
                 href={BRAND.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-gold hover:underline"
+                className="text-gold text-sm hover:underline"
               >
                 {BRAND.social.instagramHandle}
               </a>
@@ -387,7 +393,11 @@ export function InstagramStrip({ products }: { products: Product[] }) {
             href={BRAND.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className={buttonClasses({ variant: 'outline', size: 'sm', className: 'border-gold/50 text-gold hover:bg-gold hover:text-maroon-deep' })}
+            className={buttonClasses({
+              variant: 'outline',
+              size: 'sm',
+              className: 'border-gold/50 text-gold hover:bg-gold hover:text-maroon-deep',
+            })}
           >
             View more
           </a>

@@ -34,13 +34,13 @@ export function CartDrawer() {
 
   return (
     <div className="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-label="Shopping bag">
-      <div className="absolute inset-0 bg-ink/40" onClick={closeCart} aria-hidden="true" />
+      <div className="bg-ink/40 absolute inset-0" onClick={closeCart} aria-hidden="true" />
 
-      <div className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-cream shadow-2xl">
-        <header className="flex items-center justify-between border-b border-line px-5 py-4">
-          <h2 className="font-display text-xl text-maroon">
+      <div className="bg-cream absolute inset-y-0 right-0 flex w-full max-w-md flex-col shadow-2xl">
+        <header className="border-line flex items-center justify-between border-b px-5 py-4">
+          <h2 className="font-display text-maroon text-xl">
             Your Bag{' '}
-            <span className="text-sm text-muted">
+            <span className="text-muted text-sm">
               ({totals.itemCount} {totals.itemCount === 1 ? 'item' : 'items'})
             </span>
           </h2>
@@ -48,7 +48,7 @@ export function CartDrawer() {
             type="button"
             onClick={closeCart}
             aria-label="Close bag"
-            className="flex size-11 items-center justify-center text-ink hover:text-maroon"
+            className="text-ink hover:text-maroon flex size-11 items-center justify-center"
           >
             <X className="size-5" />
           </button>
@@ -71,24 +71,24 @@ export function CartDrawer() {
           <>
             {/* Free-shipping progress */}
             {totals.freeShippingRemainingPaise > 0 && (
-              <div className="border-b border-line bg-card px-5 py-3">
-                <p className="text-xs text-ink-soft">
+              <div className="border-line bg-card border-b px-5 py-3">
+                <p className="text-ink-soft text-xs">
                   Add{' '}
                   <strong className="text-maroon">
                     {formatPaise(totals.freeShippingRemainingPaise)}
                   </strong>{' '}
                   more for free shipping
                 </p>
-                <div className="mt-2 h-1 overflow-hidden rounded-full bg-line">
+                <div className="bg-line mt-2 h-1 overflow-hidden rounded-full">
                   <div
-                    className="h-full rounded-full bg-gold transition-all duration-500"
+                    className="bg-gold h-full rounded-full transition-all duration-500"
                     style={{ width: `${freeShippingProgress}%` }}
                   />
                 </div>
               </div>
             )}
             {totals.freeShippingRemainingPaise === 0 && totals.itemCount > 0 && (
-              <p className="border-b border-line bg-success-soft px-5 py-2.5 text-xs text-success">
+              <p className="border-line bg-success-soft text-success border-b px-5 py-2.5 text-xs">
                 ✓ Your order ships free
               </p>
             )}
@@ -105,13 +105,13 @@ export function CartDrawer() {
               </div>
             )}
 
-            <ul className="flex-1 divide-y divide-line overflow-y-auto px-5">
+            <ul className="divide-line flex-1 divide-y overflow-y-auto px-5">
               {lines.map((line) => (
                 <li key={line.variantId} className="flex gap-4 py-4">
                   <Link
                     href={`/products/${line.slug}`}
                     onClick={closeCart}
-                    className="relative aspect-2/3 w-20 shrink-0 overflow-hidden bg-cream-panel"
+                    className="aspect-2/3 bg-cream-panel relative w-20 shrink-0 overflow-hidden"
                   >
                     <Image
                       src={line.imageUrl}
@@ -126,21 +126,21 @@ export function CartDrawer() {
                     <Link
                       href={`/products/${line.slug}`}
                       onClick={closeCart}
-                      className="text-sm text-ink hover:text-maroon"
+                      className="text-ink hover:text-maroon text-sm"
                     >
                       {line.title}
                     </Link>
-                    <p className="mt-0.5 text-xs text-muted">
+                    <p className="text-muted mt-0.5 text-xs">
                       {line.colour} · Size {line.size}
                     </p>
 
                     <div className="mt-auto flex items-center justify-between gap-2 pt-2">
-                      <div className="flex items-center border border-line">
+                      <div className="border-line flex items-center border">
                         <button
                           type="button"
                           onClick={() => updateQuantity(line.variantId, line.quantity - 1)}
                           aria-label={`Decrease quantity of ${line.title}`}
-                          className="flex size-8 items-center justify-center text-ink hover:bg-cream-panel"
+                          className="text-ink hover:bg-cream-panel flex size-8 items-center justify-center"
                         >
                           <Minus className="size-3" />
                         </button>
@@ -152,13 +152,13 @@ export function CartDrawer() {
                           onClick={() => updateQuantity(line.variantId, line.quantity + 1)}
                           disabled={line.quantity >= Math.min(10, line.availableStock)}
                           aria-label={`Increase quantity of ${line.title}`}
-                          className="flex size-8 items-center justify-center text-ink hover:bg-cream-panel disabled:opacity-40"
+                          className="text-ink hover:bg-cream-panel flex size-8 items-center justify-center disabled:opacity-40"
                         >
                           <Plus className="size-3" />
                         </button>
                       </div>
 
-                      <span className="text-sm font-medium text-maroon">
+                      <span className="text-maroon text-sm font-medium">
                         {formatPaise(line.lineTotalPaise)}
                       </span>
                     </div>
@@ -168,7 +168,7 @@ export function CartDrawer() {
                     type="button"
                     onClick={() => removeItem(line.variantId)}
                     aria-label={`Remove ${line.title} from bag`}
-                    className="self-start p-1 text-muted transition-colors hover:text-danger"
+                    className="text-muted hover:text-danger self-start p-1 transition-colors"
                   >
                     <Trash2 className="size-4" />
                   </button>
@@ -176,14 +176,14 @@ export function CartDrawer() {
               ))}
             </ul>
 
-            <footer className="border-t border-line bg-card px-5 py-4">
+            <footer className="border-line bg-card border-t px-5 py-4">
               <dl className="space-y-1.5 text-sm">
                 <div className="flex justify-between">
                   <dt className="text-muted">Subtotal</dt>
                   <dd className="text-ink">{formatPaise(totals.subtotalPaise)}</dd>
                 </div>
                 {totals.discountPaise > 0 && (
-                  <div className="flex justify-between text-success">
+                  <div className="text-success flex justify-between">
                     <dt>Discount</dt>
                     <dd>−{formatPaise(totals.discountPaise)}</dd>
                   </div>
@@ -194,15 +194,15 @@ export function CartDrawer() {
                     {totals.shippingPaise === 0 ? 'Free' : formatPaise(totals.shippingPaise)}
                   </dd>
                 </div>
-                <div className="flex justify-between border-t border-line pt-2 text-base">
-                  <dt className="font-medium text-ink">Total</dt>
-                  <dd className="font-display text-xl font-semibold text-maroon">
+                <div className="border-line flex justify-between border-t pt-2 text-base">
+                  <dt className="text-ink font-medium">Total</dt>
+                  <dd className="font-display text-maroon text-xl font-semibold">
                     {isLoading ? <Spinner className="size-4" /> : formatPaise(totals.totalPaise)}
                   </dd>
                 </div>
               </dl>
 
-              <p className="mt-1 text-[0.625rem] text-muted">
+              <p className="text-muted mt-1 text-[0.625rem]">
                 Inclusive of all taxes ({formatPaise(totals.taxPaise)} GST)
               </p>
 

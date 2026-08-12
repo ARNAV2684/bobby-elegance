@@ -118,7 +118,9 @@ export const productFormSchema = z.object({
   categorySlug: z.string().min(1, 'Choose a category'),
   fabric: z.string().trim().min(2, 'Enter the fabric').max(80),
   workType: z.string().trim().max(80).optional().or(z.literal('')),
-  occasions: z.array(z.enum(['wedding', 'festive', 'eid', 'party', 'daily'])).min(1, 'Pick at least one occasion'),
+  occasions: z
+    .array(z.enum(['wedding', 'festive', 'eid', 'party', 'daily']))
+    .min(1, 'Pick at least one occasion'),
   basePriceRupees: z.number().positive('Price must be greater than zero').max(1_000_000),
   compareAtRupees: z.number().positive().max(1_000_000).nullable().optional(),
   status: z.enum(['DRAFT', 'ACTIVE', 'ARCHIVED']),

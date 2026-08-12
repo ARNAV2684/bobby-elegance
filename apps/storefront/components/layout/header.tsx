@@ -56,21 +56,20 @@ export function Header() {
     setQuery('');
   }
 
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href);
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
   return (
     <header className="sticky top-0 z-50">
       <AnnouncementBar />
 
-      <div className="border-b border-line bg-card/95 backdrop-blur-sm">
+      <div className="border-line bg-card/95 border-b backdrop-blur-sm">
         <Container wide>
           <div className="flex h-20 items-center justify-between gap-4">
             {/* Mobile: menu toggle */}
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
-              className="-ml-2 flex size-11 items-center justify-center text-ink lg:hidden"
+              className="text-ink -ml-2 flex size-11 items-center justify-center lg:hidden"
               aria-label="Open menu"
               aria-expanded={mobileOpen}
             >
@@ -94,7 +93,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        'label-caps flex items-center gap-1 py-2 transition-colors hover:text-maroon',
+                        'label-caps hover:text-maroon flex items-center gap-1 py-2 transition-colors',
                         isActive(item.href) ? 'text-maroon' : 'text-ink-soft',
                       )}
                       aria-haspopup={item.children ? 'true' : undefined}
@@ -103,22 +102,22 @@ export function Header() {
                       {item.label}
                       {item.children && <ChevronDown className="size-3" aria-hidden="true" />}
                       {isActive(item.href) && (
-                        <span className="absolute inset-x-0 -bottom-px h-0.5 bg-maroon" />
+                        <span className="bg-maroon absolute inset-x-0 -bottom-px h-0.5" />
                       )}
                     </Link>
 
                     {item.children && openMenu === item.href && (
                       <div className="absolute left-1/2 top-full w-64 -translate-x-1/2 pt-2">
-                        <ul className="animate-fade-up rounded-sm border border-line bg-card p-2 shadow-lg shadow-maroon/5">
+                        <ul className="animate-fade-up border-line bg-card shadow-maroon/5 rounded-sm border p-2 shadow-lg">
                           {item.children.map((child) => (
                             <li key={child.href}>
                               <Link
                                 href={child.href}
-                                className="block rounded-sm px-3 py-2.5 transition-colors hover:bg-cream-panel"
+                                className="hover:bg-cream-panel block rounded-sm px-3 py-2.5 transition-colors"
                               >
-                                <span className="block text-sm text-ink">{child.label}</span>
+                                <span className="text-ink block text-sm">{child.label}</span>
                                 {child.description && (
-                                  <span className="block text-xs text-muted">
+                                  <span className="text-muted block text-xs">
                                     {child.description}
                                   </span>
                                 )}
@@ -138,7 +137,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setSearchOpen((v) => !v)}
-                className="flex size-11 items-center justify-center text-ink transition-colors hover:text-maroon"
+                className="text-ink hover:text-maroon flex size-11 items-center justify-center transition-colors"
                 aria-label="Search"
                 aria-expanded={searchOpen}
               >
@@ -147,7 +146,7 @@ export function Header() {
 
               <Link
                 href="/account/wishlist"
-                className="hidden size-11 items-center justify-center text-ink transition-colors hover:text-maroon sm:flex"
+                className="text-ink hover:text-maroon hidden size-11 items-center justify-center transition-colors sm:flex"
                 aria-label="Wishlist"
               >
                 <Heart className="size-[18px]" />
@@ -155,7 +154,7 @@ export function Header() {
 
               <Link
                 href="/account"
-                className="hidden size-11 items-center justify-center text-ink transition-colors hover:text-maroon sm:flex"
+                className="text-ink hover:text-maroon hidden size-11 items-center justify-center transition-colors sm:flex"
                 aria-label="Account"
               >
                 <User className="size-[18px]" />
@@ -164,7 +163,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={openCart}
-                className="relative flex size-11 items-center justify-center text-ink transition-colors hover:text-maroon"
+                className="text-ink hover:text-maroon relative flex size-11 items-center justify-center transition-colors"
                 aria-label={`Shopping bag, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`}
               >
                 <ShoppingBag className="size-[18px]" />
@@ -183,10 +182,10 @@ export function Header() {
 
         {/* Search bar */}
         {searchOpen && (
-          <div className="animate-fade-up border-t border-line bg-cream">
+          <div className="animate-fade-up border-line bg-cream border-t">
             <Container wide>
               <form onSubmit={submitSearch} className="flex items-center gap-3 py-4" role="search">
-                <Search className="size-4 shrink-0 text-muted" aria-hidden="true" />
+                <Search className="text-muted size-4 shrink-0" aria-hidden="true" />
                 <input
                   autoFocus
                   type="search"
@@ -194,7 +193,7 @@ export function Header() {
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search for anarkali, lehenga, sharara…"
                   aria-label="Search products"
-                  className="flex-1 bg-transparent text-sm text-ink placeholder:text-muted/70 focus:outline-none"
+                  className="text-ink placeholder:text-muted/70 flex-1 bg-transparent text-sm focus:outline-none"
                 />
                 <button
                   type="button"
@@ -214,17 +213,17 @@ export function Header() {
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="absolute inset-0 bg-ink/40"
+            className="bg-ink/40 absolute inset-0"
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />
-          <div className="absolute inset-y-0 left-0 flex w-[85%] max-w-sm flex-col bg-card">
-            <div className="flex items-center justify-between border-b border-line px-5 py-4">
+          <div className="bg-card absolute inset-y-0 left-0 flex w-[85%] max-w-sm flex-col">
+            <div className="border-line flex items-center justify-between border-b px-5 py-4">
               <Logo showTagline={false} />
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
-                className="flex size-11 items-center justify-center text-ink"
+                className="text-ink flex size-11 items-center justify-center"
                 aria-label="Close menu"
               >
                 <X className="size-5" />
@@ -238,19 +237,19 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        'block px-4 py-3.5 text-sm tracking-wide uppercase transition-colors',
+                        'block px-4 py-3.5 text-sm uppercase tracking-wide transition-colors',
                         isActive(item.href) ? 'text-maroon' : 'text-ink',
                       )}
                     >
                       {item.label}
                     </Link>
                     {item.children && (
-                      <ul className="mb-2 ml-4 border-l border-line">
+                      <ul className="border-line mb-2 ml-4 border-l">
                         {item.children.map((child) => (
                           <li key={child.href}>
                             <Link
                               href={child.href}
-                              className="block px-4 py-2.5 text-sm text-muted transition-colors hover:text-maroon"
+                              className="text-muted hover:text-maroon block px-4 py-2.5 text-sm transition-colors"
                             >
                               {child.label}
                             </Link>
@@ -263,11 +262,11 @@ export function Header() {
               </ul>
             </nav>
 
-            <div className="flex items-center gap-4 border-t border-line px-5 py-4">
-              <Link href="/account" className="flex items-center gap-2 text-sm text-ink">
+            <div className="border-line flex items-center gap-4 border-t px-5 py-4">
+              <Link href="/account" className="text-ink flex items-center gap-2 text-sm">
                 <User className="size-4" /> Account
               </Link>
-              <Link href="/account/wishlist" className="flex items-center gap-2 text-sm text-ink">
+              <Link href="/account/wishlist" className="text-ink flex items-center gap-2 text-sm">
                 <Heart className="size-4" /> Wishlist
               </Link>
             </div>

@@ -35,7 +35,13 @@ export function Container({
  * The gold ornament divider that sits under every section heading in the
  * templates: a hairline rule either side of a small diamond.
  */
-export function Ornament({ className, tone = 'gold' }: { className?: string; tone?: 'gold' | 'cream' }) {
+export function Ornament({
+  className,
+  tone = 'gold',
+}: {
+  className?: string;
+  tone?: 'gold' | 'cream';
+}) {
   const colour = tone === 'gold' ? 'bg-gold-muted' : 'bg-cream/50';
   return (
     <span className={cn('flex items-center justify-center gap-2', className)} aria-hidden="true">
@@ -136,16 +142,16 @@ export function Field({
         <label htmlFor={htmlFor} className="label-caps text-ink-soft">
           {label}
           {required && (
-            <span className="ml-1 text-danger" aria-hidden="true">
+            <span className="text-danger ml-1" aria-hidden="true">
               *
             </span>
           )}
         </label>
       )}
       {children}
-      {hint && !error && <p className="text-xs text-muted">{hint}</p>}
+      {hint && !error && <p className="text-muted text-xs">{hint}</p>}
       {error && (
-        <p role="alert" className="text-xs text-danger">
+        <p role="alert" className="text-danger text-xs">
           {error}
         </p>
       )}
@@ -153,18 +159,23 @@ export function Field({
   );
 }
 
-export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> & { invalid?: boolean }>(
-  function Input({ className, invalid, ...props }, ref) {
-    return (
-      <input
-        ref={ref}
-        aria-invalid={invalid || undefined}
-        className={cn(FIELD_BASE, invalid && 'border-danger focus:border-danger focus:ring-danger/15', className)}
-        {...props}
-      />
-    );
-  },
-);
+export const Input = forwardRef<
+  HTMLInputElement,
+  InputHTMLAttributes<HTMLInputElement> & { invalid?: boolean }
+>(function Input({ className, invalid, ...props }, ref) {
+  return (
+    <input
+      ref={ref}
+      aria-invalid={invalid || undefined}
+      className={cn(
+        FIELD_BASE,
+        invalid && 'border-danger focus:border-danger focus:ring-danger/15',
+        className,
+      )}
+      {...props}
+    />
+  );
+});
 
 export const Textarea = forwardRef<
   HTMLTextAreaElement,
@@ -188,7 +199,12 @@ export const Select = forwardRef<
     <select
       ref={ref}
       aria-invalid={invalid || undefined}
-      className={cn(FIELD_BASE, 'cursor-pointer appearance-none pr-10', invalid && 'border-danger', className)}
+      className={cn(
+        FIELD_BASE,
+        'cursor-pointer appearance-none pr-10',
+        invalid && 'border-danger',
+        className,
+      )}
       {...props}
     >
       {children}
@@ -235,7 +251,9 @@ export function Badge({
 }
 
 export function Skeleton({ className }: { className?: string }) {
-  return <div className={cn('animate-pulse rounded-sm bg-line/60', className)} aria-hidden="true" />;
+  return (
+    <div className={cn('bg-line/60 animate-pulse rounded-sm', className)} aria-hidden="true" />
+  );
 }
 
 export function Spinner({ className }: { className?: string }) {
@@ -244,7 +262,7 @@ export function Spinner({ className }: { className?: string }) {
       role="status"
       aria-label="Loading"
       className={cn(
-        'inline-block size-5 animate-spin rounded-full border-2 border-maroon border-t-transparent',
+        'border-maroon inline-block size-5 animate-spin rounded-full border-2 border-t-transparent',
         className,
       )}
     />
@@ -297,13 +315,13 @@ export function EmptyState({
   return (
     <div className={cn('flex flex-col items-center gap-3 px-6 py-20 text-center', className)}>
       {icon && <div className="text-gold-muted">{icon}</div>}
-      <h3 className="font-display text-2xl text-maroon">{title}</h3>
-      {description && <p className="max-w-md text-sm text-muted">{description}</p>}
+      <h3 className="font-display text-maroon text-2xl">{title}</h3>
+      {description && <p className="text-muted max-w-md text-sm">{description}</p>}
       {action && <div className="mt-2">{action}</div>}
     </div>
   );
 }
 
 export function Divider({ className, ...props }: HTMLAttributes<HTMLHRElement>) {
-  return <hr className={cn('border-0 border-t border-line', className)} {...props} />;
+  return <hr className={cn('border-line border-0 border-t', className)} {...props} />;
 }

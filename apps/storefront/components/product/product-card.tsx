@@ -38,8 +38,11 @@ export function ProductCard({
 
   return (
     <article className={cn('group relative flex flex-col', className)}>
-      <Link href={`/products/${product.slug}`} className="relative block overflow-hidden bg-cream-panel">
-        <div className="relative aspect-2/3">
+      <Link
+        href={`/products/${product.slug}`}
+        className="bg-cream-panel relative block overflow-hidden"
+      >
+        <div className="aspect-2/3 relative">
           {primary && (
             <Image
               src={primary.url}
@@ -80,28 +83,30 @@ export function ProductCard({
       <button
         type="button"
         onClick={() => setWished((v) => !v)}
-        aria-label={wished ? `Remove ${product.title} from wishlist` : `Add ${product.title} to wishlist`}
+        aria-label={
+          wished ? `Remove ${product.title} from wishlist` : `Add ${product.title} to wishlist`
+        }
         aria-pressed={wished}
-        className="absolute right-3 top-3 flex size-9 items-center justify-center rounded-full bg-card/85 text-ink backdrop-blur-sm transition-colors hover:text-maroon"
+        className="bg-card/85 text-ink hover:text-maroon absolute right-3 top-3 flex size-9 items-center justify-center rounded-full backdrop-blur-sm transition-colors"
       >
         <Heart className={cn('size-4', wished && 'fill-maroon text-maroon')} />
       </button>
 
       <div className="flex flex-1 flex-col items-center gap-1 px-2 pb-1 pt-3.5 text-center">
-        <h3 className="text-sm leading-snug text-ink">
+        <h3 className="text-ink text-sm leading-snug">
           <Link href={`/products/${product.slug}`} className="hover:text-maroon">
             {product.title}
           </Link>
         </h3>
 
-        <p className="text-[0.6875rem] tracking-wide text-muted">{product.fabric}</p>
+        <p className="text-muted text-[0.6875rem] tracking-wide">{product.fabric}</p>
 
         <p className="mt-0.5 flex items-baseline justify-center gap-2">
-          <span className="font-display text-lg font-semibold text-maroon">
+          <span className="font-display text-maroon text-lg font-semibold">
             {formatPaise(product.basePricePaise)}
           </span>
           {product.compareAtPaise && (
-            <span className="text-xs text-muted line-through">
+            <span className="text-muted text-xs line-through">
               {formatPaise(product.compareAtPaise)}
             </span>
           )}

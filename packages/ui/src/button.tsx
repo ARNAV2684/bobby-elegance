@@ -7,8 +7,7 @@ type Size = 'sm' | 'md' | 'lg';
 const VARIANTS: Record<Variant, string> = {
   primary:
     'bg-maroon text-cream hover:bg-maroon-hover active:bg-maroon-deep border border-transparent',
-  outline:
-    'bg-transparent text-maroon border border-maroon hover:bg-maroon hover:text-cream',
+  outline: 'bg-transparent text-maroon border border-maroon hover:bg-maroon hover:text-cream',
   ghost: 'bg-transparent text-ink hover:bg-cream-panel border border-transparent',
   gold: 'bg-gold text-maroon-deep hover:bg-gold-light border border-transparent font-medium',
   danger: 'bg-danger text-white hover:opacity-90 border border-transparent',
@@ -31,12 +30,14 @@ const BASE =
  * look identical without nesting a link inside a button (invalid HTML, and a
  * screen reader announces it as two overlapping controls).
  */
-export function buttonClasses(opts: {
-  variant?: Variant;
-  size?: Size;
-  fullWidth?: boolean;
-  className?: string;
-} = {}): string {
+export function buttonClasses(
+  opts: {
+    variant?: Variant;
+    size?: Size;
+    fullWidth?: boolean;
+    className?: string;
+  } = {},
+): string {
   const { variant = 'primary', size = 'md', fullWidth, className } = opts;
   return cn(BASE, VARIANTS[variant], SIZES[size], fullWidth && 'w-full', className);
 }
