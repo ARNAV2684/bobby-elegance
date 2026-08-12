@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# sharp ships prebuilt binaries; allow its install script to run.
+onlyBuiltDependencies:
+  - sharp
+  - esbuild

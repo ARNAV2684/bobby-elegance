@@ -1,0 +1,198 @@
+{
+  "source": "Unsplash",
+  "license": "https://unsplash.com/license",
+  "note": "Placeholder imagery. Replace with the client photoshoot — see ATTRIBUTION.md",
+  "generatedAt": "2026-08-12T11:36:16.509Z",
+  "files": [
+    {
+      "dest": "brand/founder.jpg",
+      "bytes": 123245,
+      "id": "photo-1618306842557-a2515acf2112"
+    },
+    {
+      "dest": "collections/anarkali-sets.jpg",
+      "bytes": 192796,
+      "id": "photo-1503160865267-af4660ce7bf2"
+    },
+    {
+      "dest": "collections/daily-wear.jpg",
+      "bytes": 196804,
+      "id": "photo-1645856051845-f0ba9cd4efb5"
+    },
+    {
+      "dest": "collections/eid.jpg",
+      "bytes": 61027,
+      "id": "photo-1701365676249-9d7ab5022dec"
+    },
+    {
+      "dest": "collections/festive.jpg",
+      "bytes": 305807,
+      "id": "photo-1597983073750-16f5ded1321f"
+    },
+    {
+      "dest": "collections/gowns.jpg",
+      "bytes": 213508,
+      "id": "photo-1767955694884-d4bf352c23c2"
+    },
+    {
+      "dest": "collections/kurti-sets.jpg",
+      "bytes": 242715,
+      "id": "photo-1737515024776-03fed700028b"
+    },
+    {
+      "dest": "collections/lehengas.jpg",
+      "bytes": 113336,
+      "id": "photo-1729146768775-3662af38016e"
+    },
+    {
+      "dest": "collections/luxury.jpg",
+      "bytes": 228712,
+      "id": "photo-1610048869310-d889ff25c374"
+    },
+    {
+      "dest": "collections/new-arrivals.jpg",
+      "bytes": 120557,
+      "id": "photo-1729347917808-e3e35a462fec"
+    },
+    {
+      "dest": "collections/party-wear.jpg",
+      "bytes": 155417,
+      "id": "photo-1713296008556-29c7fae52234"
+    },
+    {
+      "dest": "collections/salwar-suits.jpg",
+      "bytes": 293972,
+      "id": "photo-1717585679395-bbe39b5fb6bc"
+    },
+    {
+      "dest": "collections/sharara-sets.jpg",
+      "bytes": 224227,
+      "id": "photo-1759906760638-eeffcb471e53"
+    },
+    {
+      "dest": "collections/wedding.jpg",
+      "bytes": 268177,
+      "id": "photo-1668371459824-094a960a227d"
+    },
+    {
+      "dest": "collections/womens.jpg",
+      "bytes": 253448,
+      "id": "photo-1571587289339-cb7da03fb5a6"
+    },
+    {
+      "dest": "hero/hero-1.jpg",
+      "bytes": 373372,
+      "id": "photo-1601571103926-ed7860bb5e2c"
+    },
+    {
+      "dest": "hero/hero-2.jpg",
+      "bytes": 339455,
+      "id": "photo-1571908599407-cdb918ed83bf"
+    },
+    {
+      "dest": "hero/hero-3.jpg",
+      "bytes": 402015,
+      "id": "photo-1569810020669-aa9d38003ea7"
+    },
+    {
+      "dest": "products/product-1.jpg",
+      "bytes": 172282,
+      "id": "photo-1599462616558-2b75fd26a283"
+    },
+    {
+      "dest": "products/product-10.jpg",
+      "bytes": 367318,
+      "id": "photo-1724856605022-106d6dd6e842"
+    },
+    {
+      "dest": "products/product-11.jpg",
+      "bytes": 122972,
+      "id": "photo-1612595391900-29390866733a"
+    },
+    {
+      "dest": "products/product-12.jpg",
+      "bytes": 141440,
+      "id": "photo-1756483509254-3cc48a5a15b2"
+    },
+    {
+      "dest": "products/product-13.jpg",
+      "bytes": 227839,
+      "id": "photo-1746372283841-dbb3838f9935"
+    },
+    {
+      "dest": "products/product-14.jpg",
+      "bytes": 196769,
+      "id": "photo-1668371679302-a8ec781e876e"
+    },
+    {
+      "dest": "products/product-15.jpg",
+      "bytes": 144589,
+      "id": "photo-1619715613791-89d35b51ff81"
+    },
+    {
+      "dest": "products/product-16.jpg",
+      "bytes": 265256,
+      "id": "photo-1649930055986-ca57250a7fd4"
+    },
+    {
+      "dest": "products/product-17.jpg",
+      "bytes": 164927,
+      "id": "photo-1602210901882-071c6b9e239d"
+    },
+    {
+      "dest": "products/product-18.jpg",
+      "bytes": 144024,
+      "id": "photo-1574847872646-abff244bbd87"
+    },
+    {
+      "dest": "products/product-19.jpg",
+      "bytes": 194001,
+      "id": "photo-1601571115502-83ca3095735b"
+    },
+    {
+      "dest": "products/product-2.jpg",
+      "bytes": 226519,
+      "id": "photo-1615573678157-69c7fce87d54"
+    },
+    {
+      "dest": "products/product-20.jpg",
+      "bytes": 161003,
+      "id": "photo-1601432093209-8af1fd74b054"
+    },
+    {
+      "dest": "products/product-3.jpg",
+      "bytes": 244078,
+      "id": "photo-1743750176861-d8e360c2e1ba"
+    },
+    {
+      "dest": "products/product-4.jpg",
+      "bytes": 208229,
+      "id": "photo-1724856604252-bcb82f20df2a"
+    },
+    {
+      "dest": "products/product-5.jpg",
+      "bytes": 255458,
+      "id": "photo-1724856605003-6a8fe56ee789"
+    },
+    {
+      "dest": "products/product-6.jpg",
+      "bytes": 254264,
+      "id": "photo-1724856604253-b65f8ec7d48b"
+    },
+    {
+      "dest": "products/product-7.jpg",
+      "bytes": 119831,
+      "id": "photo-1724856604254-f7cf4e9c8f72"
+    },
+    {
+      "dest": "products/product-8.jpg",
+      "bytes": 145896,
+      "id": "photo-1759840278326-73f26ae8c5c7"
+    },
+    {
+      "dest": "products/product-9.jpg",
+      "bytes": 257050,
+      "id": "photo-1724856604403-60304b28906c"
+    }
+  ]
+}

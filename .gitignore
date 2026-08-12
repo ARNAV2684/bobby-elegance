@@ -1,0 +1,45 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# builds
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+
+# turbo
+.turbo/
+
+# env — NEVER commit real secrets. .env.example is the only env file tracked.
+.env
+.env.*
+!.env.example
+
+# testing
+coverage/
+playwright-report/
+test-results/
+
+# editor / os
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# prisma
+prisma/*.db
+prisma/*.db-journal
+
+# misc
+.vercel
+*.pem

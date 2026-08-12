@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+/* Tailwind v4 scans source files for class names. The UI package lives outside
+   this app's directory, so it must be registered explicitly or its classes get
+   tree-shaken away in production builds. */
+@source "../../../packages/ui/src";
+
+/* Design tokens, keyframes and base layer. */
+@import '@bobby/ui/styles.css';

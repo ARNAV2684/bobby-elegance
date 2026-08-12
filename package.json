@@ -1,0 +1,29 @@
+{
+  "name": "bobby-elegance",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bobby Elegance — e-commerce storefront and admin portal",
+  "packageManager": "pnpm@11.21.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:storefront": "turbo run dev --filter=@bobby/storefront",
+    "dev:admin": "turbo run dev --filter=@bobby/admin",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mjs,json,md,css}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mjs,json,md,css}\"",
+    "clean": "turbo run clean && rimraf node_modules"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "turbo": "^2.10.9",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,227 @@
+/* ==========================================================================
+   Bobby Elegance — design tokens
+   ==========================================================================
+   Every colour below was sampled directly from the design templates
+   (w1.jpeg / w2.jpeg) rather than eyeballed. The percentage next to each note
+   is how much of the sampled region that colour occupied.
+
+   No component may hardcode a hex value. If a colour is needed, it belongs
+   here first.
+   ========================================================================== */
+
+@theme {
+  /* --- Maroon -------------------------------------------------------------
+     The brand's primary. Top announcement bar, buttons, footer, headings. */
+  --color-maroon: #530a15; /* w2 top bar + CTA, 82.8% dominant */
+  --color-maroon-hover: #450b12; /* w1 variant; reads as pressed */
+  --color-maroon-deep: #31060a; /* w2 footer base, 76.5% dominant */
+
+  /* --- Gold ---------------------------------------------------------------
+     ACCESSIBILITY: gold on cream is ~1.9:1 — it FAILS WCAG for text at every
+     size. Gold is for large display type, rules, icons and borders only.
+     Gold on maroon is ~6.1:1 and passes AA, which is why the footer and top
+     bar can use it for real text. */
+  --color-gold: #d4a764; /* hero display word "ELEGANCE", median */
+  --color-gold-light: #e4c48b; /* highlights, hover */
+  --color-gold-muted: #a98a5f; /* hairline rules and ornaments on cream */
+
+  /* --- Neutrals ----------------------------------------------------------- */
+  --color-cream: #f8f2ec; /* page background */
+  --color-cream-panel: #f2e1d3; /* warm panel behind the trust list */
+  --color-card: #fcf9f4; /* cards, header background */
+
+  --color-ink: #3a2b23; /* body text; 12.5:1 on cream */
+  --color-ink-soft: #4a3c33;
+  --color-muted: #7a6a5c;
+  --color-line: #e5daca;
+  --color-line-strong: #d8c9b4;
+
+  /* --- Status ------------------------------------------------------------- */
+  --color-success: #2e7d5b;
+  --color-success-soft: #e6f2ec;
+  --color-warning: #b8862f;
+  --color-warning-soft: #fbf1dd;
+  --color-danger: #9c2b2b;
+  --color-danger-soft: #f8e9e9;
+  --color-info: #2c5282;
+
+  /* --- Type ---------------------------------------------------------------
+     Display: high-contrast serif matching the wide-tracked "TIMELESS ELEGANCE".
+     Body:    geometric sans, close to the template's UI type. */
+  --font-display: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-body: var(--font-jost), 'Jost', ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Layout ------------------------------------------------------------- */
+  --spacing-gutter: 1.625rem; /* 26px side padding from the template */
+  --radius-card: 0.5rem;
+
+  /* --- Motion ------------------------------------------------------------- */
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  /* Visible focus everywhere. Never removed — only restyled. */
+  :focus-visible {
+    outline: 2px solid var(--color-maroon);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Skip link, revealed on keyboard focus. */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-maroon);
+    color: var(--color-card);
+  }
+}
+
+@layer components {
+  /* Small-caps mono-ish label used throughout the templates. */
+  .label-caps {
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* The wide-tracked hero display treatment. */
+  .display-hero {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.05;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Motion
+   Every animation below is disabled under prefers-reduced-motion at the end
+   of this file. Nothing here is load-bearing for comprehension.
+   -------------------------------------------------------------------------- */
+
+@keyframes be-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes be-shine {
+  from {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  to {
+    transform: translateX(220%) skewX(-20deg);
+  }
+}
+
+@keyframes be-pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes be-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-fade-up {
+  animation: be-fade-up 0.7s var(--ease-out-soft) both;
+}
+
+.pulse-dot {
+  animation: be-pulse-dot 2s ease-in-out infinite;
+}
+
+/* One-shot diagonal sweep on hover, used on cards. */
+.shine-on-hover {
+  position: relative;
+  overflow: hidden;
+}
+.shine-on-hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.35),
+    transparent
+  );
+  transform: translateX(-120%) skewX(-20deg);
+  pointer-events: none;
+}
+.shine-on-hover:hover::after {
+  animation: be-shine 0.9s var(--ease-out-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
