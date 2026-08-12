@@ -196,9 +196,13 @@ export async function POST(request: Request) {
       shippingPaise: totals.shippingPaise,
       taxPaise: totals.taxPaise,
       totalPaise: totals.totalPaise,
-      // COD is confirmed immediately; card orders would sit PENDING until the
-      // webhook lands. The mock gateway has no webhook, so it resolves here.
-      status: input.paymentMethod === 'COD' ? 'CONFIRMED' : 'PAID',
+      // COD needs no payment step, so it is confirmed immediately.
+      //
+      // Prepaid orders are created PENDING and only become PAID once payment
+      // actually succeeds — via /api/payments/confirm on the mock gateway, or
+      // the signature-verified `payment.captured` webhook on Razorpay. An
+      // order must never be marked paid merely because it was submitted.
+      status: input.paymentMethod === 'COD' ? 'CONFIRMED' : 'PENDING',
       paymentMethod: input.paymentMethod,
       couponCode: appliedCoupon?.code ?? null,
       shippingAddress: {
@@ -242,6 +246,8 @@ export async function POST(request: Request) {
       totalPaise: totals.totalPaise,
       providerOrderId,
       paymentProvider: provider.name,
+      // Where the browser should go next. COD is done; prepaid needs to pay.
+      nextStep: input.paymentMethod === 'COD' ? 'confirmed' : 'payment',
     });
   } catch (error) {
     // Anything after the decrement fails: give the stock back.
