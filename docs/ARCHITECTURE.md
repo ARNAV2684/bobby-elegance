@@ -130,6 +130,20 @@ The webhook handler (not yet built) must:
 `RazorpayProvider.verifyWebhook` already implements the signature half
 correctly, including a constant-time compare.
 
+## Known limitation of the mock data driver
+
+The storefront (`:3000`) and admin (`:3001`) are separate Node processes, and
+`MockRepository` holds state in memory per process. **An order placed on the
+storefront will not appear in the admin portal**, and stock edited in admin will
+not show on the storefront until its dev server restarts.
+
+This is not a bug in the application — both apps talk to the same `Repository`
+interface, and the moment `DATA_DRIVER=prisma` points them at one Postgres it
+disappears entirely. It is purely a property of running without a database.
+
+The seed data is identical in both, so every screen is fully demonstrable in
+isolation; it is only cross-app writes that do not propagate.
+
 ## A bug worth knowing about
 
 The repository singleton is keyed on `globalThis`, not a module-level variable.

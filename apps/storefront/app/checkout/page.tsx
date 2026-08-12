@@ -147,11 +147,16 @@ export default function CheckoutPage() {
         return;
       }
 
-      // With a real gateway this is where the Razorpay checkout widget opens.
-      // On the mock provider the order is already settled, so go straight to
-      // confirmation.
       clear();
-      router.push(`/checkout/success/${data.orderNumber}`);
+
+      // COD needs no payment step. Prepaid orders go to the payment screen,
+      // where the mock gateway settles them — or, with Razorpay configured,
+      // where its hosted widget opens.
+      router.push(
+        data.nextStep === 'payment'
+          ? `/checkout/payment/${data.orderNumber}`
+          : `/checkout/success/${data.orderNumber}`,
+      );
     } catch {
       setSubmitError('We could not reach the server. Check your connection and try again.');
       setSubmitting(false);
@@ -183,10 +188,11 @@ export default function CheckoutPage() {
         <SectionHeading title="Checkout" eyebrow="Almost there" className="mb-10" as="h1" />
 
         <Alert tone="info" className="mb-8">
-          <strong>Development mode.</strong> No payment gateway is connected, so no card details are
-          collected and no money moves. Placing an order here creates a real order record you can
-          view in the admin portal and track. Adding Razorpay is a matter of setting keys in{' '}
-          <code>.env</code> — no code changes.
+          <strong>Development mode.</strong> No real gateway is connected, so no card details are
+          collected and no money moves. Choosing &ldquo;Pay online&rdquo; takes you to a simulated
+          payment screen where you can complete or fail the payment; either way a real order record
+          is created that you can view in the admin portal and track. Connecting Razorpay is a
+          matter of setting keys in <code>.env</code> — no code changes.
         </Alert>
 
         <form onSubmit={submit} noValidate className="grid gap-10 lg:grid-cols-[1.5fr_1fr]">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Check, Minus, Plus, Ruler, ShoppingBag, Truck } from 'lucide-react';
 import { SIZES, discountPercent, formatPaise, type Product, type Size } from '@bobby/shared';
@@ -22,6 +22,7 @@ export function ProductDetail({ product }: { product: Product }) {
   const [imageIndex, setImageIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [added, setAdded] = useState(false);
+  const sizeRef = useRef<HTMLFieldSetElement>(null);
 
   // Sizes offered for the chosen colour, in the canonical order rather than
   // whatever order the variants happen to be stored in.
@@ -41,13 +42,36 @@ export function ProductDetail({ product }: { product: Product }) {
   const totalStock = product.variants.reduce((n, v) => n + v.stock, 0);
   const soldOut = totalStock === 0;
 
+  /**
+   * Preselect the first in-stock size.
+   *
+   * Previously nothing was selected by default, so "Add to bag" failed with a
+   * "Please choose a size" message rendered below the button — around 650px
+   * below the fold on a laptop. The button appeared to do nothing at all,
+   * which read as a broken cart rather than a missing selection.
+   *
+   * Defaulting removes the failure for the common case. The size picker is
+   * still directly above the button, so anyone wanting a different size sees
+   * it before they click.
+   */
+  useEffect(() => {
+    const firstAvailable = sizesForColour.find((s) => s.stock > 0);
+    setSize(firstAvailable ? firstAvailable.size : null);
+    setQuantity(1);
+  }, [sizesForColour]);
+
   function handleAdd() {
     if (!size || !selected) {
       setError('Please choose a size.');
+      // Belt and braces: if the message is off-screen, bring it into view and
+      // move focus to the size picker so keyboard users land in the right place.
+      sizeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      sizeRef.current?.querySelector<HTMLButtonElement>('button:not(:disabled)')?.focus();
       return;
     }
     if (selected.stock <= 0) {
       setError('That size is sold out.');
+      sizeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
     setError(null);
@@ -167,7 +191,7 @@ export function ProductDetail({ product }: { product: Product }) {
         )}
 
         {/* Size */}
-        <fieldset className="mt-6">
+        <fieldset ref={sizeRef} className="mt-6 scroll-mt-32">
           <legend className="label-caps text-ink mb-3 flex w-full items-center justify-between">
             <span>Size {size && <span className="text-muted">: {size}</span>}</span>
             <a
