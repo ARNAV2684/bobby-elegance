@@ -636,7 +636,9 @@ function buildProduct(spec: ProductSpec, index: number): Product {
     images: buildImages(spec),
     variants: buildVariants(spec),
     careInstructions: CARE,
-    metaTitle: `${spec.title} — ${spec.fabric} | Bobby Elegance`,
+    // The brand suffix is added by the layout's title template — including it
+    // here too would render "… | Bobby Elegance | Bobby Elegance".
+    metaTitle: `${spec.title} — ${spec.fabric}`,
     metaDescription: spec.summary,
     createdAt,
   };
