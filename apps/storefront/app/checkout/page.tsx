@@ -81,15 +81,17 @@ export default function CheckoutPage() {
 
   const totals = method === 'COD' && codTotals ? codTotals : resolved.totals;
 
-  const set = (key: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setForm((f) => ({ ...f, [key]: e.target.value }));
-    setErrors((prev) => {
-      if (!prev[key]) return prev;
-      const next = { ...prev };
-      delete next[key];
-      return next;
-    });
-  };
+  const set =
+    (key: keyof FormState) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+      setForm((f) => ({ ...f, [key]: e.target.value }));
+      setErrors((prev) => {
+        if (!prev[key]) return prev;
+        const next = { ...prev };
+        delete next[key];
+        return next;
+      });
+    };
 
   function validate(): boolean {
     const next: Record<string, string> = {};
@@ -181,9 +183,9 @@ export default function CheckoutPage() {
         <SectionHeading title="Checkout" eyebrow="Almost there" className="mb-10" as="h1" />
 
         <Alert tone="info" className="mb-8">
-          <strong>Development mode.</strong> No payment gateway is connected, so no card details
-          are collected and no money moves. Placing an order here creates a real order record you
-          can view in the admin portal and track. Adding Razorpay is a matter of setting keys in{' '}
+          <strong>Development mode.</strong> No payment gateway is connected, so no card details are
+          collected and no money moves. Placing an order here creates a real order record you can
+          view in the admin portal and track. Adding Razorpay is a matter of setting keys in{' '}
           <code>.env</code> — no code changes.
         </Alert>
 
@@ -191,7 +193,7 @@ export default function CheckoutPage() {
           <div className="flex flex-col gap-8">
             {/* Contact */}
             <section aria-labelledby="contact-heading">
-              <h2 id="contact-heading" className="font-display text-2xl text-maroon">
+              <h2 id="contact-heading" className="font-display text-maroon text-2xl">
                 1. Contact
               </h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -206,7 +208,13 @@ export default function CheckoutPage() {
                     placeholder="you@example.com"
                   />
                 </Field>
-                <Field label="Mobile" required error={errors.phone} htmlFor="phone" hint="For delivery updates">
+                <Field
+                  label="Mobile"
+                  required
+                  error={errors.phone}
+                  htmlFor="phone"
+                  hint="For delivery updates"
+                >
                   <Input
                     id="phone"
                     type="tel"
@@ -222,11 +230,17 @@ export default function CheckoutPage() {
 
             {/* Address */}
             <section aria-labelledby="address-heading">
-              <h2 id="address-heading" className="font-display text-2xl text-maroon">
+              <h2 id="address-heading" className="font-display text-maroon text-2xl">
                 2. Delivery address
               </h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                <Field label="Full name" required error={errors.fullName} htmlFor="fullName" className="sm:col-span-2">
+                <Field
+                  label="Full name"
+                  required
+                  error={errors.fullName}
+                  htmlFor="fullName"
+                  className="sm:col-span-2"
+                >
                   <Input
                     id="fullName"
                     autoComplete="name"
@@ -279,7 +293,12 @@ export default function CheckoutPage() {
                   />
                 </Field>
                 <Field label="State" required htmlFor="state" className="sm:col-span-2">
-                  <Select id="state" value={form.state} onChange={set('state')} autoComplete="address-level1">
+                  <Select
+                    id="state"
+                    value={form.state}
+                    onChange={set('state')}
+                    autoComplete="address-level1"
+                  >
                     {INDIAN_STATES.map((s) => (
                       <option key={s} value={s}>
                         {s}
@@ -287,7 +306,12 @@ export default function CheckoutPage() {
                     ))}
                   </Select>
                 </Field>
-                <Field label="Order notes" htmlFor="notes" className="sm:col-span-2" hint="Optional">
+                <Field
+                  label="Order notes"
+                  htmlFor="notes"
+                  className="sm:col-span-2"
+                  hint="Optional"
+                >
                   <Textarea id="notes" value={form.notes} onChange={set('notes')} rows={3} />
                 </Field>
               </div>
@@ -295,30 +319,28 @@ export default function CheckoutPage() {
 
             {/* Payment */}
             <section aria-labelledby="payment-heading">
-              <h2 id="payment-heading" className="font-display text-2xl text-maroon">
+              <h2 id="payment-heading" className="font-display text-maroon text-2xl">
                 3. Payment
               </h2>
               <fieldset className="mt-4 flex flex-col gap-3">
                 <legend className="sr-only">Payment method</legend>
 
-                {(
-                  [
-                    {
-                      value: 'RAZORPAY' as const,
-                      icon: CreditCard,
-                      title: 'Pay online',
-                      body: 'UPI, cards, net banking and wallets',
-                      note: 'Razorpay — connects when keys are added',
-                    },
-                    {
-                      value: 'COD' as const,
-                      icon: Banknote,
-                      title: 'Cash on delivery',
-                      body: 'Pay the courier when your order arrives',
-                      note: `₹50 handling fee`,
-                    },
-                  ]
-                ).map((opt) => (
+                {[
+                  {
+                    value: 'RAZORPAY' as const,
+                    icon: CreditCard,
+                    title: 'Pay online',
+                    body: 'UPI, cards, net banking and wallets',
+                    note: 'Razorpay — connects when keys are added',
+                  },
+                  {
+                    value: 'COD' as const,
+                    icon: Banknote,
+                    title: 'Cash on delivery',
+                    body: 'Pay the courier when your order arrives',
+                    note: `₹50 handling fee`,
+                  },
+                ].map((opt) => (
                   <label
                     key={opt.value}
                     className={cn(
@@ -336,11 +358,14 @@ export default function CheckoutPage() {
                       onChange={() => setMethod(opt.value)}
                       className="mt-1 size-4 accent-[var(--color-maroon)]"
                     />
-                    <opt.icon className="mt-0.5 size-5 shrink-0 text-gold-muted" aria-hidden="true" />
+                    <opt.icon
+                      className="text-gold-muted mt-0.5 size-5 shrink-0"
+                      aria-hidden="true"
+                    />
                     <span className="flex-1">
-                      <span className="block text-sm font-medium text-ink">{opt.title}</span>
-                      <span className="block text-xs text-muted">{opt.body}</span>
-                      <span className="mt-0.5 block text-[0.625rem] text-muted/80">{opt.note}</span>
+                      <span className="text-ink block text-sm font-medium">{opt.title}</span>
+                      <span className="text-muted block text-xs">{opt.body}</span>
+                      <span className="text-muted/80 mt-0.5 block text-[0.625rem]">{opt.note}</span>
                     </span>
                   </label>
                 ))}
@@ -350,25 +375,31 @@ export default function CheckoutPage() {
 
           {/* Summary */}
           <aside aria-label="Order summary" className="lg:sticky lg:top-32 lg:self-start">
-            <div className="border border-line bg-card p-6">
-              <h2 className="font-display text-xl text-maroon">Your order</h2>
+            <div className="border-line bg-card border p-6">
+              <h2 className="font-display text-maroon text-xl">Your order</h2>
 
-              <ul className="mt-4 divide-y divide-line border-y border-line">
+              <ul className="divide-line border-line mt-4 divide-y border-y">
                 {resolved.lines.map((line) => (
                   <li key={line.variantId} className="flex gap-3 py-3">
-                    <div className="relative aspect-2/3 w-14 shrink-0 overflow-hidden bg-cream-panel">
-                      <Image src={line.imageUrl} alt="" fill sizes="56px" className="object-cover" />
-                      <span className="absolute -right-1.5 -top-1.5 flex size-5 items-center justify-center rounded-full bg-maroon text-[0.625rem] text-cream tabular-nums">
+                    <div className="aspect-2/3 bg-cream-panel relative w-14 shrink-0 overflow-hidden">
+                      <Image
+                        src={line.imageUrl}
+                        alt=""
+                        fill
+                        sizes="56px"
+                        className="object-cover"
+                      />
+                      <span className="bg-maroon text-cream absolute -right-1.5 -top-1.5 flex size-5 items-center justify-center rounded-full text-[0.625rem] tabular-nums">
                         {line.quantity}
                       </span>
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-xs text-ink">{line.title}</p>
-                      <p className="text-[0.625rem] text-muted">
+                      <p className="text-ink truncate text-xs">{line.title}</p>
+                      <p className="text-muted text-[0.625rem]">
                         {line.colour} · {line.size}
                       </p>
                     </div>
-                    <p className="text-xs text-ink">{formatPaise(line.lineTotalPaise)}</p>
+                    <p className="text-ink text-xs">{formatPaise(line.lineTotalPaise)}</p>
                   </li>
                 ))}
               </ul>
@@ -379,15 +410,13 @@ export default function CheckoutPage() {
                   <dd>{formatPaise(totals.subtotalPaise)}</dd>
                 </div>
                 {totals.discountPaise > 0 && (
-                  <div className="flex justify-between text-success">
+                  <div className="text-success flex justify-between">
                     <dt>Discount</dt>
                     <dd>−{formatPaise(totals.discountPaise)}</dd>
                   </div>
                 )}
                 <div className="flex justify-between">
-                  <dt className="text-muted">
-                    Shipping{method === 'COD' ? ' + COD fee' : ''}
-                  </dt>
+                  <dt className="text-muted">Shipping{method === 'COD' ? ' + COD fee' : ''}</dt>
                   <dd>
                     {totals.shippingPaise === 0 ? (
                       <span className="text-success">Free</span>
@@ -396,14 +425,14 @@ export default function CheckoutPage() {
                     )}
                   </dd>
                 </div>
-                <div className="flex justify-between border-t border-line pt-3">
-                  <dt className="text-base font-medium text-ink">Total</dt>
-                  <dd className="font-display text-2xl font-semibold text-maroon">
+                <div className="border-line flex justify-between border-t pt-3">
+                  <dt className="text-ink text-base font-medium">Total</dt>
+                  <dd className="font-display text-maroon text-2xl font-semibold">
                     {formatPaise(totals.totalPaise)}
                   </dd>
                 </div>
               </dl>
-              <p className="mt-1 text-[0.625rem] text-muted">
+              <p className="text-muted mt-1 text-[0.625rem]">
                 Inclusive of {formatPaise(totals.taxPaise)} GST
               </p>
 
@@ -418,7 +447,7 @@ export default function CheckoutPage() {
                 {submitting ? 'Placing order…' : `Place order · ${formatPaise(totals.totalPaise)}`}
               </Button>
 
-              <p className="mt-3 text-center text-[0.625rem] leading-relaxed text-muted">
+              <p className="text-muted mt-3 text-center text-[0.625rem] leading-relaxed">
                 By placing this order you agree to our{' '}
                 <Link href="/policies/terms" className="text-maroon underline">
                   Terms

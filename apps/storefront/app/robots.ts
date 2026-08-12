@@ -9,7 +9,15 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       // Nothing under these paths is useful in an index, and /track and
       // /checkout/success contain order details that should never be crawled.
-      disallow: ['/api/', '/cart', '/checkout', '/checkout/success/', '/track/', '/account', '/search'],
+      disallow: [
+        '/api/',
+        '/cart',
+        '/checkout',
+        '/checkout/success/',
+        '/track/',
+        '/account',
+        '/search',
+      ],
     },
     sitemap: `${BASE}/sitemap.xml`,
   };

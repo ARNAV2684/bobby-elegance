@@ -14,48 +14,60 @@ export default async function CustomersPage() {
       <PageHeader title="Customers" subtitle={`${customers.length} customers`} />
 
       <div className="p-6">
-        <div className="overflow-x-auto border border-line bg-card">
+        <div className="border-line bg-card overflow-x-auto border">
           <table className="w-full text-sm">
             <caption className="sr-only">Customers</caption>
             <thead>
-              <tr className="border-b border-line text-left">
-                <th scope="col" className="label-caps px-4 py-3 text-muted">Name</th>
-                <th scope="col" className="label-caps px-4 py-3 text-muted">Contact</th>
-                <th scope="col" className="label-caps px-4 py-3 text-muted">Location</th>
-                <th scope="col" className="label-caps px-4 py-3 text-muted">Since</th>
-                <th scope="col" className="label-caps px-4 py-3 text-right text-muted">Orders</th>
-                <th scope="col" className="label-caps px-4 py-3 text-right text-muted">Spent</th>
+              <tr className="border-line border-b text-left">
+                <th scope="col" className="label-caps text-muted px-4 py-3">
+                  Name
+                </th>
+                <th scope="col" className="label-caps text-muted px-4 py-3">
+                  Contact
+                </th>
+                <th scope="col" className="label-caps text-muted px-4 py-3">
+                  Location
+                </th>
+                <th scope="col" className="label-caps text-muted px-4 py-3">
+                  Since
+                </th>
+                <th scope="col" className="label-caps text-muted px-4 py-3 text-right">
+                  Orders
+                </th>
+                <th scope="col" className="label-caps text-muted px-4 py-3 text-right">
+                  Spent
+                </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-line">
+            <tbody className="divide-line divide-y">
               {customers.map((customer) => (
-                <tr key={customer.id} className="transition-colors hover:bg-cream-panel/40">
-                  <td className="px-4 py-3 text-xs text-ink">{customer.name}</td>
+                <tr key={customer.id} className="hover:bg-cream-panel/40 transition-colors">
+                  <td className="text-ink px-4 py-3 text-xs">{customer.name}</td>
                   <td className="px-4 py-3">
                     <a
                       href={`mailto:${customer.email}`}
-                      className="block text-xs text-maroon hover:underline"
+                      className="text-maroon block text-xs hover:underline"
                     >
                       {customer.email}
                     </a>
                     {customer.phone && (
-                      <span className="text-[0.625rem] text-muted">
+                      <span className="text-muted text-[0.625rem]">
                         {formatPhone(customer.phone)}
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-xs text-ink-soft">
+                  <td className="text-ink-soft px-4 py-3 text-xs">
                     {customer.addresses[0]
                       ? `${customer.addresses[0].city}, ${customer.addresses[0].state}`
                       : '—'}
                   </td>
-                  <td className="px-4 py-3 text-[0.625rem] text-muted">
+                  <td className="text-muted px-4 py-3 text-[0.625rem]">
                     {formatDate(customer.createdAt)}
                   </td>
-                  <td className="px-4 py-3 text-right text-xs tabular-nums text-ink">
+                  <td className="text-ink px-4 py-3 text-right text-xs tabular-nums">
                     {customer.orderCount}
                   </td>
-                  <td className="px-4 py-3 text-right text-xs tabular-nums text-ink">
+                  <td className="text-ink px-4 py-3 text-right text-xs tabular-nums">
                     {formatPaise(customer.totalSpentPaise)}
                   </td>
                 </tr>
@@ -64,9 +76,9 @@ export default async function CustomersPage() {
           </table>
         </div>
 
-        <p className="mt-3 text-xs text-muted">
-          Customer records are personal data. Access here must be behind staff authentication
-          before this portal is deployed anywhere reachable.
+        <p className="text-muted mt-3 text-xs">
+          Customer records are personal data. Access here must be behind staff authentication before
+          this portal is deployed anywhere reachable.
         </p>
       </div>
     </>

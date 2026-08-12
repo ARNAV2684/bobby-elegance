@@ -10,10 +10,7 @@ export default async function InventoryPage() {
   const { items } = await getRepository().listProducts({}, 'name-asc', 1, 500);
 
   const totalVariants = items.reduce((n, p) => n + p.variants.length, 0);
-  const outOfStock = items.reduce(
-    (n, p) => n + p.variants.filter((v) => v.stock === 0).length,
-    0,
-  );
+  const outOfStock = items.reduce((n, p) => n + p.variants.filter((v) => v.stock === 0).length, 0);
 
   return (
     <>

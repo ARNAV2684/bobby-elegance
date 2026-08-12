@@ -25,7 +25,7 @@ export default async function CollectionsIndexPage() {
         <li key={c.id}>
           <Link
             href={`/collections/${c.slug}`}
-            className="group relative block aspect-4/5 overflow-hidden bg-maroon-deep"
+            className="aspect-4/5 bg-maroon-deep group relative block overflow-hidden"
           >
             <Image
               src={c.imageUrl}
@@ -34,10 +34,10 @@ export default async function CollectionsIndexPage() {
               sizes="(max-width: 768px) 50vw, 33vw"
               className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-maroon-deep/90 via-maroon-deep/20 to-transparent" />
+            <div className="from-maroon-deep/90 via-maroon-deep/20 absolute inset-0 bg-gradient-to-t to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-5">
-              <h3 className="font-display text-xl text-cream">{c.name}</h3>
-              <p className="mt-1 line-clamp-2 text-xs text-cream/70">{c.description}</p>
+              <h3 className="font-display text-cream text-xl">{c.name}</h3>
+              <p className="text-cream/70 mt-1 line-clamp-2 text-xs">{c.description}</p>
             </div>
           </Link>
         </li>
@@ -57,7 +57,12 @@ export default async function CollectionsIndexPage() {
         />
 
         <section aria-labelledby="by-style" className="mb-16">
-          <SectionHeading id="by-style" title="Shop by style" align="left" className="mb-7 items-start" />
+          <SectionHeading
+            id="by-style"
+            title="Shop by style"
+            align="left"
+            className="mb-7 items-start"
+          />
           <Grid items={categories} />
         </section>
 

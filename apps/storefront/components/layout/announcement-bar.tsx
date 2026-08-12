@@ -16,12 +16,12 @@ export function AnnouncementBar() {
   return (
     <div className="bg-maroon text-cream">
       <Container wide>
-        <div className="flex h-9 items-center justify-between gap-4 text-[0.625rem] tracking-[0.14em] uppercase">
+        <div className="flex h-9 items-center justify-between gap-4 text-[0.625rem] uppercase tracking-[0.14em]">
           {ANNOUNCEMENTS.map((item, i) => {
             const Icon = ICONS[item.icon as keyof typeof ICONS] ?? Crown;
             const content = (
               <span className="flex items-center gap-1.5 whitespace-nowrap">
-                <Icon className="size-3 text-gold" aria-hidden="true" />
+                <Icon className="text-gold size-3" aria-hidden="true" />
                 {item.text}
               </span>
             );
@@ -33,7 +33,7 @@ export function AnnouncementBar() {
               <Link
                 key={item.text}
                 href={item.href}
-                className={`${responsive} transition-colors hover:text-gold`}
+                className={`${responsive} hover:text-gold transition-colors`}
               >
                 {content}
               </Link>

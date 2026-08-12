@@ -46,12 +46,12 @@ export default function StoresPage() {
 
         <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {STORES.map((store) => (
-            <li key={store.id} className="flex flex-col border border-line bg-card p-6">
-              <h2 className="font-display text-xl leading-tight text-maroon">{store.name}</h2>
+            <li key={store.id} className="border-line bg-card flex flex-col border p-6">
+              <h2 className="font-display text-maroon text-xl leading-tight">{store.name}</h2>
 
               <address className="mt-4 flex flex-1 flex-col gap-3 text-sm not-italic">
-                <span className="flex gap-2.5 text-ink-soft">
-                  <MapPin className="mt-0.5 size-4 shrink-0 text-gold-muted" aria-hidden="true" />
+                <span className="text-ink-soft flex gap-2.5">
+                  <MapPin className="text-gold-muted mt-0.5 size-4 shrink-0" aria-hidden="true" />
                   <span>
                     {store.addressLine}
                     <br />
@@ -59,16 +59,16 @@ export default function StoresPage() {
                   </span>
                 </span>
 
-                <span className="flex gap-2.5 text-ink-soft">
-                  <Clock className="mt-0.5 size-4 shrink-0 text-gold-muted" aria-hidden="true" />
+                <span className="text-ink-soft flex gap-2.5">
+                  <Clock className="text-gold-muted mt-0.5 size-4 shrink-0" aria-hidden="true" />
                   {store.hours}
                 </span>
 
                 <a
                   href={`tel:+91${store.phone}`}
-                  className="flex gap-2.5 text-ink-soft transition-colors hover:text-maroon"
+                  className="text-ink-soft hover:text-maroon flex gap-2.5 transition-colors"
                 >
-                  <Phone className="mt-0.5 size-4 shrink-0 text-gold-muted" aria-hidden="true" />
+                  <Phone className="text-gold-muted mt-0.5 size-4 shrink-0" aria-hidden="true" />
                   {formatPhone(store.phone)}
                 </a>
               </address>
@@ -85,9 +85,9 @@ export default function StoresPage() {
           ))}
         </ul>
 
-        <div className="mt-14 border border-line bg-cream-panel/50 p-8 text-center">
-          <h2 className="font-display text-2xl text-maroon">Can’t make it to a store?</h2>
-          <p className="mx-auto mt-3 max-w-lg text-sm text-ink-soft">
+        <div className="border-line bg-cream-panel/50 mt-14 border p-8 text-center">
+          <h2 className="font-display text-maroon text-2xl">Can’t make it to a store?</h2>
+          <p className="text-ink-soft mx-auto mt-3 max-w-lg text-sm">
             Call us and we will send photos and video of anything in stock over WhatsApp. We ship
             across India, and returns are free within 7 days.
           </p>

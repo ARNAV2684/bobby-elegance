@@ -37,7 +37,15 @@ export const CUSTOMERS: Customer[] = [
     phone: '9820012345',
     name: 'Priya Sharma',
     addresses: [
-      addr('a1', 'Priya Sharma', '9820012345', '502, Sai Darshan, Sheetal Nagar', 'Thane', 'Maharashtra', '401107'),
+      addr(
+        'a1',
+        'Priya Sharma',
+        '9820012345',
+        '502, Sai Darshan, Sheetal Nagar',
+        'Thane',
+        'Maharashtra',
+        '401107',
+      ),
     ],
     createdAt: '2026-02-14T10:20:00.000Z',
     orderCount: 4,
@@ -49,7 +57,15 @@ export const CUSTOMERS: Customer[] = [
     phone: '9930045678',
     name: 'Aisha Khan',
     addresses: [
-      addr('a2', 'Aisha Khan', '9930045678', '12, Green Acres, Naya Nagar', 'Thane', 'Maharashtra', '401107'),
+      addr(
+        'a2',
+        'Aisha Khan',
+        '9930045678',
+        '12, Green Acres, Naya Nagar',
+        'Thane',
+        'Maharashtra',
+        '401107',
+      ),
     ],
     createdAt: '2026-04-02T08:15:00.000Z',
     orderCount: 2,
@@ -73,7 +89,15 @@ export const CUSTOMERS: Customer[] = [
     phone: '9769023456',
     name: 'Fatima Ansari',
     addresses: [
-      addr('a4', 'Fatima Ansari', '9769023456', '301, Pearl Residency, Beverly Park', 'Thane', 'Maharashtra', '401107'),
+      addr(
+        'a4',
+        'Fatima Ansari',
+        '9769023456',
+        '301, Pearl Residency, Beverly Park',
+        'Thane',
+        'Maharashtra',
+        '401107',
+      ),
     ],
     createdAt: '2026-06-11T11:05:00.000Z',
     orderCount: 3,
@@ -84,7 +108,9 @@ export const CUSTOMERS: Customer[] = [
     email: 'ananya.desai@example.com',
     phone: '9876054321',
     name: 'Ananya Desai',
-    addresses: [addr('a5', 'Ananya Desai', '9876054321', '44, CG Road', 'Ahmedabad', 'Gujarat', '380009')],
+    addresses: [
+      addr('a5', 'Ananya Desai', '9876054321', '44, CG Road', 'Ahmedabad', 'Gujarat', '380009'),
+    ],
     createdAt: '2026-07-30T09:30:00.000Z',
     orderCount: 1,
     totalSpentPaise: rupeesToPaise(11995),
@@ -97,7 +123,15 @@ interface OrderSpec {
   status: OrderStatus;
   daysAgo: number;
   cod?: boolean;
-  items: { slug: string; title: string; size: string; colour: string; price: number; qty: number; img: number }[];
+  items: {
+    slug: string;
+    title: string;
+    size: string;
+    colour: string;
+    price: number;
+    qty: number;
+    img: number;
+  }[];
   coupon?: { code: string; discount: number };
   awb?: string;
   courier?: string;
@@ -110,8 +144,24 @@ const ORDER_SPECS: OrderSpec[] = [
     status: 'DELIVERED',
     daysAgo: 18,
     items: [
-      { slug: 'embroidered-anarkali-set', title: 'Embroidered Anarkali Set', size: 'M', colour: 'Deep Maroon', price: 6995, qty: 1, img: 1 },
-      { slug: 'chikankari-kurti-set', title: 'Chikankari Kurti Set', size: 'L', colour: 'White', price: 3495, qty: 1, img: 15 },
+      {
+        slug: 'embroidered-anarkali-set',
+        title: 'Embroidered Anarkali Set',
+        size: 'M',
+        colour: 'Deep Maroon',
+        price: 6995,
+        qty: 1,
+        img: 1,
+      },
+      {
+        slug: 'chikankari-kurti-set',
+        title: 'Chikankari Kurti Set',
+        size: 'L',
+        colour: 'White',
+        price: 3495,
+        qty: 1,
+        img: 15,
+      },
     ],
     coupon: { code: 'WELCOME10', discount: 1049 },
     awb: 'SR8842910337',
@@ -123,7 +173,15 @@ const ORDER_SPECS: OrderSpec[] = [
     status: 'SHIPPED',
     daysAgo: 4,
     items: [
-      { slug: 'designer-sharara-set', title: 'Designer Sharara Set', size: 'S', colour: 'Blush Pink', price: 7495, qty: 1, img: 3 },
+      {
+        slug: 'designer-sharara-set',
+        title: 'Designer Sharara Set',
+        size: 'S',
+        colour: 'Blush Pink',
+        price: 7495,
+        qty: 1,
+        img: 3,
+      },
     ],
     awb: 'SR9917462201',
     courier: 'Blue Dart Express',
@@ -135,7 +193,15 @@ const ORDER_SPECS: OrderSpec[] = [
     daysAgo: 2,
     cod: true,
     items: [
-      { slug: 'jaipuri-suit-set', title: 'Jaipuri Suit Set', size: 'XL', colour: 'Mustard', price: 4995, qty: 2, img: 7 },
+      {
+        slug: 'jaipuri-suit-set',
+        title: 'Jaipuri Suit Set',
+        size: 'XL',
+        colour: 'Mustard',
+        price: 4995,
+        qty: 2,
+        img: 7,
+      },
     ],
   },
   {
@@ -144,7 +210,15 @@ const ORDER_SPECS: OrderSpec[] = [
     status: 'CONFIRMED',
     daysAgo: 1,
     items: [
-      { slug: 'embroidered-anarkali-set', title: 'Embroidered Anarkali Set', size: 'S', colour: 'Bottle Green', price: 6995, qty: 1, img: 2 },
+      {
+        slug: 'embroidered-anarkali-set',
+        title: 'Embroidered Anarkali Set',
+        size: 'S',
+        colour: 'Bottle Green',
+        price: 6995,
+        qty: 1,
+        img: 2,
+      },
     ],
   },
   {
@@ -153,7 +227,15 @@ const ORDER_SPECS: OrderSpec[] = [
     status: 'PAID',
     daysAgo: 0,
     items: [
-      { slug: 'reception-gown', title: 'Reception Gown', size: 'M', colour: 'Champagne', price: 11995, qty: 1, img: 13 },
+      {
+        slug: 'reception-gown',
+        title: 'Reception Gown',
+        size: 'M',
+        colour: 'Champagne',
+        price: 11995,
+        qty: 1,
+        img: 13,
+      },
     ],
   },
   {
@@ -162,7 +244,15 @@ const ORDER_SPECS: OrderSpec[] = [
     status: 'CANCELLED',
     daysAgo: 9,
     items: [
-      { slug: 'luxury-velvet-suit', title: 'Luxury Velvet Suit', size: 'L', colour: 'Emerald', price: 8995, qty: 1, img: 9 },
+      {
+        slug: 'luxury-velvet-suit',
+        title: 'Luxury Velvet Suit',
+        size: 'L',
+        colour: 'Emerald',
+        price: 8995,
+        qty: 1,
+        img: 9,
+      },
     ],
   },
 ];

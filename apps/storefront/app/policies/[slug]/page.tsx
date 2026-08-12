@@ -223,7 +223,12 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
     <div className="py-12">
       <Container>
         <div className="mx-auto max-w-2xl">
-          <SectionHeading title={policy.title} subtitle={policy.summary} className="mb-10" as="h1" />
+          <SectionHeading
+            title={policy.title}
+            subtitle={policy.summary}
+            className="mb-10"
+            as="h1"
+          />
 
           <Alert tone="warning" className="mb-8">
             <strong>Draft wording.</strong> These policies are structurally complete and reasonable,
@@ -234,10 +239,10 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
           <div className="flex flex-col gap-8">
             {policy.sections.map((section) => (
               <section key={section.heading}>
-                <h2 className="font-display text-xl text-maroon">{section.heading}</h2>
+                <h2 className="font-display text-maroon text-xl">{section.heading}</h2>
                 <div className="mt-3 flex flex-col gap-3">
                   {section.body.map((paragraph) => (
-                    <p key={paragraph} className="text-sm leading-relaxed text-ink-soft">
+                    <p key={paragraph} className="text-ink-soft text-sm leading-relaxed">
                       {paragraph}
                     </p>
                   ))}
@@ -246,7 +251,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
             ))}
           </div>
 
-          <p className="mt-12 border-t border-line pt-6 text-xs text-muted">
+          <p className="border-line text-muted mt-12 border-t pt-6 text-xs">
             Questions about this policy? Call {BRAND.contact.phoneDisplay} or email{' '}
             <a href={`mailto:${BRAND.contact.email}`} className="text-maroon hover:underline">
               {BRAND.contact.email}

@@ -35,7 +35,9 @@ export default async function SearchPage({
     <div className="py-12">
       <Container wide>
         <SectionHeading
-          eyebrow={query ? `${result.total} ${result.total === 1 ? 'result' : 'results'}` : undefined}
+          eyebrow={
+            query ? `${result.total} ${result.total === 1 ? 'result' : 'results'}` : undefined
+          }
           title={query ? `Search: ${query}` : 'Search'}
           className="mb-10"
           as="h1"
@@ -65,7 +67,7 @@ export default async function SearchPage({
           />
         ) : (
           <>
-            <div className="mb-6 flex items-center justify-end border-b border-line pb-4">
+            <div className="border-line mb-6 flex items-center justify-end border-b pb-4">
               <SortSelect />
             </div>
 

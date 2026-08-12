@@ -158,7 +158,7 @@ export function InventoryTable({ products }: { products: Product[] }) {
               onClick={() => setFilter(value)}
               aria-pressed={filter === value}
               className={cn(
-                'border px-3.5 py-2.5 text-xs tracking-wide uppercase transition-colors first:rounded-l-sm last:rounded-r-sm',
+                'border px-3.5 py-2.5 text-xs uppercase tracking-wide transition-colors first:rounded-l-sm last:rounded-r-sm',
                 filter === value
                   ? 'border-maroon bg-maroon text-cream'
                   : 'border-line bg-card text-ink hover:border-maroon',
@@ -169,7 +169,12 @@ export function InventoryTable({ products }: { products: Product[] }) {
           ))}
         </div>
 
-        <Button variant="outline" size="sm" onClick={() => setBulkOpen((v) => !v)} className="ml-auto">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setBulkOpen((v) => !v)}
+          className="ml-auto"
+        >
           <Upload className="size-3.5" />
           Bulk update
         </Button>
@@ -177,9 +182,9 @@ export function InventoryTable({ products }: { products: Product[] }) {
 
       {/* Bulk panel */}
       {bulkOpen && (
-        <div className="mb-4 border border-line bg-card p-5">
-          <h2 className="font-display text-lg text-maroon">Bulk stock update</h2>
-          <p className="mt-1 text-xs text-muted">
+        <div className="border-line bg-card mb-4 border p-5">
+          <h2 className="font-display text-maroon text-lg">Bulk stock update</h2>
+          <p className="text-muted mt-1 text-xs">
             Paste one <code>SKU,stock</code> per line. A header row is fine. Nothing is written
             unless every line is valid.
           </p>
@@ -217,41 +222,51 @@ export function InventoryTable({ products }: { products: Product[] }) {
       )}
 
       {/* Table */}
-      <div className="overflow-x-auto border border-line bg-card">
+      <div className="border-line bg-card overflow-x-auto border">
         <table className="w-full text-sm">
-          <caption className="sr-only">
-            Product inventory: {visible.length} variants shown
-          </caption>
+          <caption className="sr-only">Product inventory: {visible.length} variants shown</caption>
           <thead>
-            <tr className="border-b border-line text-left">
-              <th scope="col" className="label-caps px-4 py-3 text-muted">Product</th>
-              <th scope="col" className="label-caps px-4 py-3 text-muted">SKU</th>
-              <th scope="col" className="label-caps px-4 py-3 text-muted">Variant</th>
-              <th scope="col" className="label-caps px-4 py-3 text-right text-muted">Price</th>
-              <th scope="col" className="label-caps px-4 py-3 text-right text-muted">Stock</th>
-              <th scope="col" className="label-caps px-4 py-3 text-muted">Storefront</th>
+            <tr className="border-line border-b text-left">
+              <th scope="col" className="label-caps text-muted px-4 py-3">
+                Product
+              </th>
+              <th scope="col" className="label-caps text-muted px-4 py-3">
+                SKU
+              </th>
+              <th scope="col" className="label-caps text-muted px-4 py-3">
+                Variant
+              </th>
+              <th scope="col" className="label-caps text-muted px-4 py-3 text-right">
+                Price
+              </th>
+              <th scope="col" className="label-caps text-muted px-4 py-3 text-right">
+                Stock
+              </th>
+              <th scope="col" className="label-caps text-muted px-4 py-3">
+                Storefront
+              </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-line">
+          <tbody className="divide-line divide-y">
             {visible.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-4 py-12 text-center text-sm text-muted">
+                <td colSpan={6} className="text-muted px-4 py-12 text-center text-sm">
                   No variants match that filter.
                 </td>
               </tr>
             ) : (
               visible.map((row) => (
-                <tr key={row.variantId} className="transition-colors hover:bg-cream-panel/40">
+                <tr key={row.variantId} className="hover:bg-cream-panel/40 transition-colors">
                   <td className="px-4 py-3">
-                    <p className="text-xs text-ink">{row.productTitle}</p>
+                    <p className="text-ink text-xs">{row.productTitle}</p>
                   </td>
                   <td className="px-4 py-3">
-                    <code className="text-[0.625rem] text-muted">{row.sku}</code>
+                    <code className="text-muted text-[0.625rem]">{row.sku}</code>
                   </td>
-                  <td className="px-4 py-3 text-xs text-ink-soft">
+                  <td className="text-ink-soft px-4 py-3 text-xs">
                     {row.colour} · {row.size}
                   </td>
-                  <td className="px-4 py-3 text-right text-xs tabular-nums text-ink">
+                  <td className="text-ink px-4 py-3 text-right text-xs tabular-nums">
                     {formatPaise(row.pricePaise)}
                   </td>
                   <td className="px-4 py-3 text-right">
@@ -274,7 +289,7 @@ export function InventoryTable({ products }: { products: Product[] }) {
                           type="button"
                           onClick={() => commitStock(row)}
                           aria-label="Save"
-                          className="p-1 text-success"
+                          className="text-success p-1"
                         >
                           <Check className="size-4" />
                         </button>
@@ -287,7 +302,7 @@ export function InventoryTable({ products }: { products: Product[] }) {
                           setDraft(String(row.stock));
                         }}
                         className={cn(
-                          'min-w-14 rounded-sm px-2 py-1 text-xs tabular-nums transition-colors hover:bg-cream-panel',
+                          'hover:bg-cream-panel min-w-14 rounded-sm px-2 py-1 text-xs tabular-nums transition-colors',
                           row.stock === 0
                             ? 'text-danger'
                             : row.stock <= 3
@@ -320,7 +335,7 @@ export function InventoryTable({ products }: { products: Product[] }) {
         </table>
       </div>
 
-      <p className="mt-3 text-xs text-muted">
+      <p className="text-muted mt-3 text-xs">
         Showing {visible.length} of {rows.length} variants. Click a stock number to edit it.
       </p>
     </div>

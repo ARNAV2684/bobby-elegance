@@ -50,31 +50,42 @@ export default async function ReportsPage() {
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <StatCard label="Total revenue" value={formatPaise(revenue)} hint="Excluding cancelled" />
           <StatCard label="Average order" value={formatPaise(averageOrder)} />
-          <StatCard label="Cash on delivery" value={`${codShare}%`} hint="Share of settled orders" />
-          <StatCard label="Active products" value={stats.totalProducts} hint={`${products.length} total`} />
+          <StatCard
+            label="Cash on delivery"
+            value={`${codShare}%`}
+            hint="Share of settled orders"
+          />
+          <StatCard
+            label="Active products"
+            value={stats.totalProducts}
+            hint={`${products.length} total`}
+          />
         </div>
 
         <div className="mt-6 grid gap-6 xl:grid-cols-[1.3fr_1fr]">
           {/* Top products */}
-          <section aria-labelledby="top" className="border border-line bg-card">
-            <h2 id="top" className="border-b border-line px-5 py-4 font-display text-lg text-maroon">
+          <section aria-labelledby="top" className="border-line bg-card border">
+            <h2
+              id="top"
+              className="border-line font-display text-maroon border-b px-5 py-4 text-lg"
+            >
               Best sellers by units
             </h2>
             {topProducts.length === 0 ? (
-              <p className="px-5 py-8 text-sm text-muted">No sales recorded yet.</p>
+              <p className="text-muted px-5 py-8 text-sm">No sales recorded yet.</p>
             ) : (
-              <ul className="divide-y divide-line">
+              <ul className="divide-line divide-y">
                 {topProducts.map((p) => (
                   <li key={p.title} className="px-5 py-3">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="min-w-0 truncate text-xs text-ink">{p.title}</span>
-                      <span className="shrink-0 text-xs tabular-nums text-muted">
+                      <span className="text-ink min-w-0 truncate text-xs">{p.title}</span>
+                      <span className="text-muted shrink-0 text-xs tabular-nums">
                         {p.units} · {formatPaise(p.revenuePaise)}
                       </span>
                     </div>
-                    <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-line">
+                    <div className="bg-line mt-1.5 h-1.5 overflow-hidden rounded-full">
                       <div
-                        className="h-full rounded-full bg-gold"
+                        className="bg-gold h-full rounded-full"
                         style={{ width: `${(p.units / maxUnits) * 100}%` }}
                       />
                     </div>
@@ -85,24 +96,27 @@ export default async function ReportsPage() {
           </section>
 
           {/* Orders by status */}
-          <section aria-labelledby="status" className="border border-line bg-card">
-            <h2 id="status" className="border-b border-line px-5 py-4 font-display text-lg text-maroon">
+          <section aria-labelledby="status" className="border-line bg-card border">
+            <h2
+              id="status"
+              className="border-line font-display text-maroon border-b px-5 py-4 text-lg"
+            >
               Orders by status
             </h2>
-            <ul className="divide-y divide-line">
+            <ul className="divide-line divide-y">
               {[...byStatus.entries()]
                 .sort((a, b) => b[1] - a[1])
                 .map(([status, count]) => (
                   <li key={status} className="flex items-center justify-between px-5 py-3">
-                    <span className="text-xs text-ink">{ORDER_STATUS_LABELS[status]}</span>
-                    <span className="text-xs tabular-nums text-muted">{count}</span>
+                    <span className="text-ink text-xs">{ORDER_STATUS_LABELS[status]}</span>
+                    <span className="text-muted text-xs tabular-nums">{count}</span>
                   </li>
                 ))}
             </ul>
           </section>
         </div>
 
-        <p className="mt-4 text-xs text-muted">
+        <p className="text-muted mt-4 text-xs">
           Figures are computed from the seed order history in this development build. Once real
           orders flow through Postgres these become live numbers with no code change.
         </p>

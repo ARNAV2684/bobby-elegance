@@ -30,16 +30,16 @@ export function StatusControl({
   }
 
   return (
-    <div className="border border-line bg-card p-5">
-      <h2 className="font-display text-lg text-maroon">Update status</h2>
+    <div className="border-line bg-card border p-5">
+      <h2 className="font-display text-maroon text-lg">Update status</h2>
 
       {transitions.length === 0 ? (
-        <p className="mt-2 text-xs text-muted">
+        <p className="text-muted mt-2 text-xs">
           This order is in a final state. No further changes are possible.
         </p>
       ) : (
         <>
-          <p className="mt-1 text-xs text-muted">
+          <p className="text-muted mt-1 text-xs">
             Currently <strong className="text-ink">{ORDER_STATUS_LABELS[status]}</strong>. Only
             valid next steps are shown.
           </p>
@@ -66,12 +66,12 @@ export function StatusControl({
       )}
 
       {status === 'PACKED' && (
-        <div className="mt-4 border-t border-line pt-4">
-          <p className="flex items-start gap-2 text-xs text-muted">
-            <Truck className="mt-0.5 size-3.5 shrink-0 text-gold-muted" aria-hidden="true" />
+        <div className="border-line mt-4 border-t pt-4">
+          <p className="text-muted flex items-start gap-2 text-xs">
+            <Truck className="text-gold-muted mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
             <span>
-              With Shiprocket connected, marking this shipped would request a courier, assign an
-              AWB and generate the label. Add credentials to <code>.env</code> to enable it.
+              With Shiprocket connected, marking this shipped would request a courier, assign an AWB
+              and generate the label. Add credentials to <code>.env</code> to enable it.
             </span>
           </p>
         </div>

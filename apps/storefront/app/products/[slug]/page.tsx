@@ -71,9 +71,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       '@type': 'Offer',
       priceCurrency: 'INR',
       price: paiseToRupees(product.basePricePaise).toFixed(2),
-      availability: inStock
-        ? 'https://schema.org/InStock'
-        : 'https://schema.org/OutOfStock',
+      availability: inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       itemCondition: 'https://schema.org/NewCondition',
       seller: { '@type': 'Organization', name: BRAND.name },
     },
@@ -107,7 +105,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       <Container wide>
         <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex flex-wrap items-center gap-2 text-xs text-muted">
+          <ol className="text-muted flex flex-wrap items-center gap-2 text-xs">
             <li>
               <Link href="/" className="hover:text-maroon">
                 Home

@@ -106,12 +106,24 @@ export const MAIN_NAV: NavItem[] = [
     label: 'Collections',
     href: '/collections',
     children: [
-      { label: 'Salwar Suits', href: '/collections/salwar-suits', description: 'Everyday elegance' },
-      { label: 'Anarkali Sets', href: '/collections/anarkali-sets', description: 'Flowing silhouettes' },
+      {
+        label: 'Salwar Suits',
+        href: '/collections/salwar-suits',
+        description: 'Everyday elegance',
+      },
+      {
+        label: 'Anarkali Sets',
+        href: '/collections/anarkali-sets',
+        description: 'Flowing silhouettes',
+      },
       { label: 'Lehengas', href: '/collections/lehengas', description: 'For the big day' },
       { label: 'Gowns', href: '/collections/gowns', description: 'Contemporary drama' },
       { label: 'Kurti Sets', href: '/collections/kurti-sets', description: 'Relaxed and refined' },
-      { label: 'Sharara Sets', href: '/collections/sharara-sets', description: 'Festive favourites' },
+      {
+        label: 'Sharara Sets',
+        href: '/collections/sharara-sets',
+        description: 'Festive favourites',
+      },
     ],
   },
   { label: 'About Us', href: '/about' },

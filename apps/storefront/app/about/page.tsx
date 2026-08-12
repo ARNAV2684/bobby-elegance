@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative flex h-80 items-center justify-center overflow-hidden bg-maroon-deep">
+      <section className="bg-maroon-deep relative flex h-80 items-center justify-center overflow-hidden">
         <Image
           src="/images/hero/hero-2.jpg"
           alt=""
@@ -24,7 +24,7 @@ export default function AboutPage() {
         />
         <div className="relative text-center">
           <span className="label-caps text-gold">{BRAND.legacyLabel}</span>
-          <h1 className="display-hero mt-3 text-[clamp(2.25rem,6vw,3.5rem)] text-cream">
+          <h1 className="display-hero text-cream mt-3 text-[clamp(2.25rem,6vw,3.5rem)]">
             Our Story
           </h1>
           <Ornament tone="cream" className="mt-4" />
@@ -33,9 +33,9 @@ export default function AboutPage() {
 
       <Container>
         <div className="mx-auto max-w-2xl py-16">
-          <p className="font-display text-2xl leading-relaxed text-maroon">{STORY.body}</p>
+          <p className="font-display text-maroon text-2xl leading-relaxed">{STORY.body}</p>
 
-          <div className="mt-10 space-y-5 text-sm leading-relaxed text-ink-soft">
+          <div className="text-ink-soft mt-10 space-y-5 text-sm leading-relaxed">
             <p>
               What started as a single shop in Mira Road has become five, and the reason is
               unglamorous: we kept the same suppliers, kept the same standards, and kept answering
@@ -49,17 +49,17 @@ export default function AboutPage() {
               will tell you when something is not right for you.
             </p>
             <p>
-              Ethnic wear is bought for the days people remember. Weddings, Eid, Diwali, a first
-              job interview. We take that seriously, which mostly means being honest about fit,
-              fabric and delivery dates rather than saying whatever closes the sale.
+              Ethnic wear is bought for the days people remember. Weddings, Eid, Diwali, a first job
+              interview. We take that seriously, which mostly means being honest about fit, fabric
+              and delivery dates rather than saying whatever closes the sale.
             </p>
           </div>
 
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
             {TRUST_POINTS.map((point) => (
-              <div key={point.subtitle} className="border border-line bg-card p-5">
-                <p className="font-display text-2xl text-maroon">{point.title}</p>
-                <p className="mt-1 text-xs tracking-wide text-muted uppercase">{point.subtitle}</p>
+              <div key={point.subtitle} className="border-line bg-card border p-5">
+                <p className="font-display text-maroon text-2xl">{point.title}</p>
+                <p className="text-muted mt-1 text-xs uppercase tracking-wide">{point.subtitle}</p>
               </div>
             ))}
           </div>
@@ -70,7 +70,7 @@ export default function AboutPage() {
       <section className="bg-cream-panel/50 py-16">
         <Container>
           <div className="mx-auto grid max-w-3xl items-center gap-10 sm:grid-cols-[280px_1fr]">
-            <div className="relative aspect-3/4 overflow-hidden bg-cream-panel">
+            <div className="aspect-3/4 bg-cream-panel relative overflow-hidden">
               <Image
                 src="/images/brand/founder.jpg"
                 alt={`${BRAND.founder.name}, founder of ${BRAND.name}`}
@@ -81,8 +81,8 @@ export default function AboutPage() {
             </div>
             <div>
               <span className="label-caps text-gold-muted">Founder</span>
-              <h2 className="mt-2 font-display text-3xl text-maroon">{BRAND.founder.name}</h2>
-              <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+              <h2 className="font-display text-maroon mt-2 text-3xl">{BRAND.founder.name}</h2>
+              <p className="text-ink-soft mt-4 text-sm leading-relaxed">
                 Known to everyone as {BRAND.founder.nickname}, he opened the first Bobby Elegance in{' '}
                 {BRAND.established} and still picks the fabric for every collection himself. If you
                 visit the flagship on a weekday, he is usually there.

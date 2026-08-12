@@ -49,13 +49,13 @@ export default async function TrackOrderPage({
         <div className="mx-auto max-w-3xl">
           <div className="flex flex-col items-center text-center">
             <span className="label-caps text-gold-muted">Order tracking</span>
-            <h1 className="mt-2 font-display text-3xl tracking-wider text-maroon">
+            <h1 className="font-display text-maroon mt-2 text-3xl tracking-wider">
               {order.orderNumber}
             </h1>
             <Ornament className="mt-3" />
             <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
               <Badge tone={TONE[order.status]}>{ORDER_STATUS_LABELS[order.status]}</Badge>
-              <span className="text-xs text-muted">Placed {formatDate(order.placedAt)}</span>
+              <span className="text-muted text-xs">Placed {formatDate(order.placedAt)}</span>
             </div>
           </div>
 
@@ -88,7 +88,7 @@ export default async function TrackOrderPage({
                         done
                           ? 'border-success bg-success text-white'
                           : 'border-line bg-cream text-muted',
-                        active && 'ring-4 ring-success/15',
+                        active && 'ring-success/15 ring-4',
                       )}
                     >
                       {done ? (
@@ -99,7 +99,7 @@ export default async function TrackOrderPage({
                     </span>
                     <span
                       className={cn(
-                        'text-center text-[0.625rem] leading-tight tracking-wide uppercase',
+                        'text-center text-[0.625rem] uppercase leading-tight tracking-wide',
                         done ? 'text-ink' : 'text-muted',
                       )}
                     >
@@ -113,25 +113,28 @@ export default async function TrackOrderPage({
 
           {/* Shipment */}
           {order.shipment && (
-            <section aria-labelledby="shipment" className="mt-10 border border-line bg-card">
-              <h2 id="shipment" className="border-b border-line px-6 py-4 font-display text-xl text-maroon">
+            <section aria-labelledby="shipment" className="border-line bg-card mt-10 border">
+              <h2
+                id="shipment"
+                className="border-line font-display text-maroon border-b px-6 py-4 text-xl"
+              >
                 Shipment
               </h2>
 
               <dl className="grid gap-4 px-6 py-5 text-sm sm:grid-cols-3">
                 <div>
                   <dt className="label-caps text-muted">Courier</dt>
-                  <dd className="mt-1 text-ink">{order.shipment.courierName ?? '—'}</dd>
+                  <dd className="text-ink mt-1">{order.shipment.courierName ?? '—'}</dd>
                 </div>
                 <div>
                   <dt className="label-caps text-muted">Tracking number</dt>
-                  <dd className="mt-1 font-mono text-xs text-ink">
+                  <dd className="text-ink mt-1 font-mono text-xs">
                     {order.shipment.awbCode ?? 'Assigned once packed'}
                   </dd>
                 </div>
                 <div>
                   <dt className="label-caps text-muted">Expected</dt>
-                  <dd className="mt-1 text-ink">
+                  <dd className="text-ink mt-1">
                     {order.shipment.estimatedDelivery
                       ? formatDate(order.shipment.estimatedDelivery)
                       : '—'}
@@ -140,32 +143,36 @@ export default async function TrackOrderPage({
               </dl>
 
               {order.shipment.events.length > 0 && (
-                <ol className="border-t border-line px-6 py-5">
+                <ol className="border-line border-t px-6 py-5">
                   {order.shipment.events.map((event, i) => (
-                    <li key={`${event.status}-${event.occurredAt}`} className="flex gap-4 pb-5 last:pb-0">
+                    <li
+                      key={`${event.status}-${event.occurredAt}`}
+                      className="flex gap-4 pb-5 last:pb-0"
+                    >
                       <div className="flex flex-col items-center">
                         <span
                           className={cn(
                             'mt-1 size-2.5 shrink-0 rounded-full',
-                            i === 0 ? 'bg-success ring-4 ring-success/15' : 'bg-line-strong',
+                            i === 0 ? 'bg-success ring-success/15 ring-4' : 'bg-line-strong',
                           )}
                           aria-hidden="true"
                         />
                         {i < order.shipment!.events.length - 1 && (
-                          <span className="mt-1 w-px flex-1 bg-line" aria-hidden="true" />
+                          <span className="bg-line mt-1 w-px flex-1" aria-hidden="true" />
                         )}
                       </div>
                       <div className="pb-1">
                         <p className={cn('text-sm', i === 0 ? 'text-ink' : 'text-ink-soft')}>
                           {event.status}
                         </p>
-                        <p className="text-xs text-muted">{event.description}</p>
-                        <p className="mt-0.5 text-[0.625rem] text-muted">
+                        <p className="text-muted text-xs">{event.description}</p>
+                        <p className="text-muted mt-0.5 text-[0.625rem]">
                           {formatDateTime(event.occurredAt)}
                           {event.location && (
                             <>
                               {' · '}
-                              <MapPin className="inline size-2.5" aria-hidden="true" /> {event.location}
+                              <MapPin className="inline size-2.5" aria-hidden="true" />{' '}
+                              {event.location}
                             </>
                           )}
                         </p>
@@ -175,7 +182,7 @@ export default async function TrackOrderPage({
                 </ol>
               )}
 
-              <p className="border-t border-line px-6 py-3 text-[0.625rem] text-muted">
+              <p className="border-line text-muted border-t px-6 py-3 text-[0.625rem]">
                 Tracking data is simulated in this development build. Live Shiprocket tracking
                 activates when credentials are configured.
               </p>
@@ -183,18 +190,21 @@ export default async function TrackOrderPage({
           )}
 
           {/* Items */}
-          <section aria-labelledby="items" className="mt-8 border border-line bg-card">
-            <h2 id="items" className="border-b border-line px-6 py-4 font-display text-xl text-maroon">
+          <section aria-labelledby="items" className="border-line bg-card mt-8 border">
+            <h2
+              id="items"
+              className="border-line font-display text-maroon border-b px-6 py-4 text-xl"
+            >
               <Package className="mr-2 inline size-4" aria-hidden="true" />
               {order.items.length} {order.items.length === 1 ? 'item' : 'items'}
             </h2>
 
-            <ul className="divide-y divide-line px-6">
+            <ul className="divide-line divide-y px-6">
               {order.items.map((item) => (
                 <li key={item.id} className="flex gap-4 py-4">
                   <Link
                     href={`/products/${item.productSlug}`}
-                    className="relative aspect-2/3 w-16 shrink-0 overflow-hidden bg-cream-panel"
+                    className="aspect-2/3 bg-cream-panel relative w-16 shrink-0 overflow-hidden"
                   >
                     <Image
                       src={item.imageUrlSnapshot}
@@ -205,36 +215,45 @@ export default async function TrackOrderPage({
                     />
                   </Link>
                   <div className="flex-1">
-                    <Link href={`/products/${item.productSlug}`} className="text-sm text-ink hover:text-maroon">
+                    <Link
+                      href={`/products/${item.productSlug}`}
+                      className="text-ink hover:text-maroon text-sm"
+                    >
                       {item.titleSnapshot}
                     </Link>
-                    <p className="mt-0.5 text-xs text-muted">
+                    <p className="text-muted mt-0.5 text-xs">
                       {item.colourSnapshot} · Size {item.sizeSnapshot} · Qty {item.quantity}
                     </p>
                   </div>
-                  <p className="text-sm text-ink">{formatPaise(item.lineTotalPaise)}</p>
+                  <p className="text-ink text-sm">{formatPaise(item.lineTotalPaise)}</p>
                 </li>
               ))}
             </ul>
 
-            <div className="flex justify-between border-t border-line px-6 py-4">
-              <span className="text-sm font-medium text-ink">
-                Total{order.paymentMethod === 'COD' && <span className="text-xs text-muted"> (pay on delivery)</span>}
+            <div className="border-line flex justify-between border-t px-6 py-4">
+              <span className="text-ink text-sm font-medium">
+                Total
+                {order.paymentMethod === 'COD' && (
+                  <span className="text-muted text-xs"> (pay on delivery)</span>
+                )}
               </span>
-              <span className="font-display text-xl font-semibold text-maroon">
+              <span className="font-display text-maroon text-xl font-semibold">
                 {formatPaise(order.totalPaise)}
               </span>
             </div>
           </section>
 
           <div className="mt-8 text-center">
-            <p className="text-xs text-muted">
+            <p className="text-muted text-xs">
               Something not right? Call us on{' '}
               <a href={`tel:+91${BRAND.contact.phone}`} className="text-maroon hover:underline">
                 {BRAND.contact.phoneDisplay}
               </a>
             </p>
-            <Link href="/track" className={buttonClasses({ variant: 'outline', size: 'sm', className: 'mt-4' })}>
+            <Link
+              href="/track"
+              className={buttonClasses({ variant: 'outline', size: 'sm', className: 'mt-4' })}
+            >
               Track another order
             </Link>
           </div>

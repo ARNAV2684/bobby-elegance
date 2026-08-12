@@ -31,10 +31,10 @@ export function Sidebar() {
   return (
     <>
       {/* Desktop rail */}
-      <aside className="hidden w-56 shrink-0 flex-col border-r border-line bg-maroon-deep lg:flex">
-        <div className="border-b border-cream/10 px-5 py-5">
-          <p className="font-display text-lg leading-none tracking-[0.14em] text-cream">BOBBY</p>
-          <p className="label-caps mt-1 text-gold">Admin Portal</p>
+      <aside className="border-line bg-maroon-deep hidden w-56 shrink-0 flex-col border-r lg:flex">
+        <div className="border-cream/10 border-b px-5 py-5">
+          <p className="font-display text-cream text-lg leading-none tracking-[0.14em]">BOBBY</p>
+          <p className="label-caps text-gold mt-1">Admin Portal</p>
         </div>
 
         <nav aria-label="Admin" className="flex-1 p-3">
@@ -59,18 +59,18 @@ export function Sidebar() {
           </ul>
         </nav>
 
-        <div className="border-t border-cream/10 p-3">
+        <div className="border-cream/10 border-t p-3">
           <a
             href="http://localhost:3000"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm text-cream/70 transition-colors hover:text-gold"
+            className="text-cream/70 hover:text-gold flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm transition-colors"
           >
             <ExternalLink className="size-4" aria-hidden="true" />
             View storefront
           </a>
-          <div className="mt-2 rounded-sm bg-cream/5 px-3 py-2.5">
-            <p className="text-xs text-cream">Abdullah Khan</p>
+          <div className="bg-cream/5 mt-2 rounded-sm px-3 py-2.5">
+            <p className="text-cream text-xs">Abdullah Khan</p>
             <p className="label-caps text-gold">Owner</p>
           </div>
         </div>
@@ -79,7 +79,7 @@ export function Sidebar() {
       {/* Mobile tab bar */}
       <nav
         aria-label="Admin"
-        className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-maroon-deep lg:hidden"
+        className="border-line bg-maroon-deep fixed inset-x-0 bottom-0 z-50 border-t lg:hidden"
       >
         <ul className="flex">
           {NAV.slice(0, 5).map((item) => (
@@ -88,7 +88,7 @@ export function Sidebar() {
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 className={cn(
-                  'flex flex-col items-center gap-1 py-2.5 text-[0.5625rem] tracking-wide uppercase',
+                  'flex flex-col items-center gap-1 py-2.5 text-[0.5625rem] uppercase tracking-wide',
                   isActive(item.href) ? 'text-gold' : 'text-cream/60',
                 )}
               >

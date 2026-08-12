@@ -62,5 +62,8 @@ export interface PaymentProvider {
   createOrder(input: CreateOrderInput): Promise<CreateOrderResult>;
   verifyPayment(input: VerifyPaymentInput): Promise<VerifyResult>;
   verifyWebhook(rawBody: string, signature: string): Promise<WebhookResult>;
-  refund(providerPaymentId: string, amountPaise?: Paise): Promise<{ ok: boolean; refundId?: string }>;
+  refund(
+    providerPaymentId: string,
+    amountPaise?: Paise,
+  ): Promise<{ ok: boolean; refundId?: string }>;
 }

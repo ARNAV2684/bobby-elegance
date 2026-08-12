@@ -32,7 +32,7 @@ export function SortSelect() {
           next.delete('page');
           router.push(`${pathname}?${next.toString()}`, { scroll: false });
         }}
-        className="cursor-pointer appearance-none border border-line bg-card py-2.5 pl-4 pr-9 text-xs tracking-wide uppercase focus:border-maroon focus:outline-none"
+        className="border-line bg-card focus:border-maroon cursor-pointer appearance-none border py-2.5 pl-4 pr-9 text-xs uppercase tracking-wide focus:outline-none"
       >
         {OPTIONS.map((o) => (
           <option key={o.value} value={o.value}>
@@ -41,7 +41,7 @@ export function SortSelect() {
         ))}
       </select>
       <ChevronDown
-        className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-muted"
+        className="text-muted pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2"
         aria-hidden="true"
       />
     </div>

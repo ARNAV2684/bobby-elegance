@@ -44,19 +44,19 @@ export function Pagination({
           href={href(page - 1)}
           rel="prev"
           aria-label="Previous page"
-          className="flex size-10 items-center justify-center border border-line text-ink transition-colors hover:border-maroon hover:text-maroon"
+          className="border-line text-ink hover:border-maroon hover:text-maroon flex size-10 items-center justify-center border transition-colors"
         >
           <ChevronLeft className="size-4" />
         </Link>
       ) : (
-        <span className="flex size-10 items-center justify-center border border-line/50 text-muted/40">
+        <span className="border-line/50 text-muted/40 flex size-10 items-center justify-center border">
           <ChevronLeft className="size-4" />
         </span>
       )}
 
       {pages.map((p, i) =>
         p === 'gap' ? (
-          <span key={`gap-${i}`} className="px-1.5 text-muted">
+          <span key={`gap-${i}`} className="text-muted px-1.5">
             …
           </span>
         ) : (
@@ -81,12 +81,12 @@ export function Pagination({
           href={href(page + 1)}
           rel="next"
           aria-label="Next page"
-          className="flex size-10 items-center justify-center border border-line text-ink transition-colors hover:border-maroon hover:text-maroon"
+          className="border-line text-ink hover:border-maroon hover:text-maroon flex size-10 items-center justify-center border transition-colors"
         >
           <ChevronRight className="size-4" />
         </Link>
       ) : (
-        <span className="flex size-10 items-center justify-center border border-line/50 text-muted/40">
+        <span className="border-line/50 text-muted/40 flex size-10 items-center justify-center border">
           <ChevronRight className="size-4" />
         </span>
       )}

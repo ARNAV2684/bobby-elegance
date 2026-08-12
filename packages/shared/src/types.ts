@@ -142,14 +142,7 @@ export interface ResolvedCart {
 }
 
 export type OrderStatus =
-  | 'PENDING'
-  | 'PAID'
-  | 'CONFIRMED'
-  | 'PACKED'
-  | 'SHIPPED'
-  | 'DELIVERED'
-  | 'CANCELLED'
-  | 'REFUNDED';
+  'PENDING' | 'PAID' | 'CONFIRMED' | 'PACKED' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED' | 'REFUNDED';
 
 export const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
   PENDING: 'Pending payment',

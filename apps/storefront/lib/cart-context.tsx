@@ -141,8 +141,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
               return match ? { ...l, quantity: match.quantity } : l;
             });
           const changed =
-            next.length !== prev.length ||
-            next.some((l, i) => l.quantity !== prev[i]?.quantity);
+            next.length !== prev.length || next.some((l, i) => l.quantity !== prev[i]?.quantity);
           return changed ? next : prev;
         });
       })

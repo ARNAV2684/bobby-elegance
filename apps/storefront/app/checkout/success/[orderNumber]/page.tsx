@@ -27,21 +27,24 @@ export default async function OrderSuccessPage({
         <div className="mx-auto max-w-2xl">
           {/* Confirmation */}
           <div className="flex flex-col items-center text-center">
-            <span className="flex size-16 items-center justify-center rounded-full bg-success-soft text-success">
+            <span className="bg-success-soft text-success flex size-16 items-center justify-center rounded-full">
               <Check className="size-8" aria-hidden="true" />
             </span>
-            <h1 className="mt-5 font-display text-3xl text-maroon sm:text-4xl">
-              Thank you{order.shippingAddress.fullName ? `, ${order.shippingAddress.fullName.split(' ')[0]}` : ''}
+            <h1 className="font-display text-maroon mt-5 text-3xl sm:text-4xl">
+              Thank you
+              {order.shippingAddress.fullName
+                ? `, ${order.shippingAddress.fullName.split(' ')[0]}`
+                : ''}
             </h1>
             <Ornament className="mt-3" />
-            <p className="mt-4 text-sm text-ink-soft">
+            <p className="text-ink-soft mt-4 text-sm">
               Your order is confirmed. We have sent the details to{' '}
               <strong className="text-ink">{maskEmail(order.email)}</strong>.
             </p>
 
-            <p className="mt-6 border border-line bg-card px-6 py-3">
-              <span className="label-caps block text-muted">Order number</span>
-              <span className="font-display text-2xl tracking-wider text-maroon">
+            <p className="border-line bg-card mt-6 border px-6 py-3">
+              <span className="label-caps text-muted block">Order number</span>
+              <span className="font-display text-maroon text-2xl tracking-wider">
                 {order.orderNumber}
               </span>
             </p>
@@ -54,29 +57,32 @@ export default async function OrderSuccessPage({
               { icon: Package, title: 'Packed', body: 'Ready in 2–3 working days' },
               { icon: Truck, title: 'Shipped', body: 'Tracking sent by SMS' },
             ].map((step, i) => (
-              <li key={step.title} className="border border-line bg-card p-4 text-center">
+              <li key={step.title} className="border-line bg-card border p-4 text-center">
                 <step.icon
-                  className={i === 0 ? 'mx-auto size-5 text-success' : 'mx-auto size-5 text-muted'}
+                  className={i === 0 ? 'text-success mx-auto size-5' : 'text-muted mx-auto size-5'}
                   aria-hidden="true"
                 />
-                <p className="mt-2 text-sm font-medium text-ink">{step.title}</p>
-                <p className="text-xs text-muted">{step.body}</p>
+                <p className="text-ink mt-2 text-sm font-medium">{step.title}</p>
+                <p className="text-muted text-xs">{step.body}</p>
               </li>
             ))}
           </ol>
 
           {/* Order detail */}
-          <section aria-labelledby="items-heading" className="mt-10 border border-line bg-card">
-            <h2 id="items-heading" className="border-b border-line px-6 py-4 font-display text-xl text-maroon">
+          <section aria-labelledby="items-heading" className="border-line bg-card mt-10 border">
+            <h2
+              id="items-heading"
+              className="border-line font-display text-maroon border-b px-6 py-4 text-xl"
+            >
               Order details
             </h2>
 
-            <ul className="divide-y divide-line px-6">
+            <ul className="divide-line divide-y px-6">
               {order.items.map((item) => (
                 <li key={item.id} className="flex gap-4 py-4">
                   <Link
                     href={`/products/${item.productSlug}`}
-                    className="relative aspect-2/3 w-16 shrink-0 overflow-hidden bg-cream-panel"
+                    className="aspect-2/3 bg-cream-panel relative w-16 shrink-0 overflow-hidden"
                   >
                     <Image
                       src={item.imageUrlSnapshot}
@@ -89,26 +95,26 @@ export default async function OrderSuccessPage({
                   <div className="flex-1">
                     <Link
                       href={`/products/${item.productSlug}`}
-                      className="text-sm text-ink hover:text-maroon"
+                      className="text-ink hover:text-maroon text-sm"
                     >
                       {item.titleSnapshot}
                     </Link>
-                    <p className="mt-0.5 text-xs text-muted">
+                    <p className="text-muted mt-0.5 text-xs">
                       {item.colourSnapshot} · Size {item.sizeSnapshot} · Qty {item.quantity}
                     </p>
                   </div>
-                  <p className="text-sm text-ink">{formatPaise(item.lineTotalPaise)}</p>
+                  <p className="text-ink text-sm">{formatPaise(item.lineTotalPaise)}</p>
                 </li>
               ))}
             </ul>
 
-            <dl className="space-y-2 border-t border-line px-6 py-4 text-sm">
+            <dl className="border-line space-y-2 border-t px-6 py-4 text-sm">
               <div className="flex justify-between">
                 <dt className="text-muted">Subtotal</dt>
                 <dd>{formatPaise(order.subtotalPaise)}</dd>
               </div>
               {order.discountPaise > 0 && (
-                <div className="flex justify-between text-success">
+                <div className="text-success flex justify-between">
                   <dt>Discount {order.couponCode && `(${order.couponCode})`}</dt>
                   <dd>−{formatPaise(order.discountPaise)}</dd>
                 </div>
@@ -117,20 +123,23 @@ export default async function OrderSuccessPage({
                 <dt className="text-muted">Shipping</dt>
                 <dd>{order.shippingPaise === 0 ? 'Free' : formatPaise(order.shippingPaise)}</dd>
               </div>
-              <div className="flex justify-between border-t border-line pt-2 text-base">
-                <dt className="font-medium text-ink">
-                  Total {order.paymentMethod === 'COD' && <span className="text-xs text-muted">(pay on delivery)</span>}
+              <div className="border-line flex justify-between border-t pt-2 text-base">
+                <dt className="text-ink font-medium">
+                  Total{' '}
+                  {order.paymentMethod === 'COD' && (
+                    <span className="text-muted text-xs">(pay on delivery)</span>
+                  )}
                 </dt>
-                <dd className="font-display text-xl font-semibold text-maroon">
+                <dd className="font-display text-maroon text-xl font-semibold">
                   {formatPaise(order.totalPaise)}
                 </dd>
               </div>
             </dl>
 
-            <div className="grid gap-6 border-t border-line px-6 py-4 text-sm sm:grid-cols-2">
+            <div className="border-line grid gap-6 border-t px-6 py-4 text-sm sm:grid-cols-2">
               <div>
                 <h3 className="label-caps text-muted">Delivering to</h3>
-                <address className="mt-1.5 text-xs leading-relaxed text-ink not-italic">
+                <address className="text-ink mt-1.5 text-xs not-italic leading-relaxed">
                   {order.shippingAddress.fullName}
                   <br />
                   {order.shippingAddress.line1}
@@ -147,9 +156,9 @@ export default async function OrderSuccessPage({
               </div>
               <div>
                 <h3 className="label-caps text-muted">Placed on</h3>
-                <p className="mt-1.5 text-xs text-ink">{formatDate(order.placedAt)}</p>
-                <h3 className="label-caps mt-3 text-muted">Payment</h3>
-                <p className="mt-1.5 text-xs text-ink">
+                <p className="text-ink mt-1.5 text-xs">{formatDate(order.placedAt)}</p>
+                <h3 className="label-caps text-muted mt-3">Payment</h3>
+                <p className="text-ink mt-1.5 text-xs">
                   {order.paymentMethod === 'COD' ? 'Cash on delivery' : 'Paid online'}
                 </p>
               </div>
@@ -171,7 +180,7 @@ export default async function OrderSuccessPage({
             </Link>
           </div>
 
-          <p className="mt-8 text-center text-xs text-muted">
+          <p className="text-muted mt-8 text-center text-xs">
             Questions about your order? Call us on{' '}
             <a href={`tel:+91${BRAND.contact.phone}`} className="text-maroon hover:underline">
               {BRAND.contact.phoneDisplay}

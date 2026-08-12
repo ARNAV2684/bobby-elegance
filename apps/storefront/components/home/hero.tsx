@@ -39,7 +39,7 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
     <section
       aria-roledescription="carousel"
       aria-label="Featured collections"
-      className="relative h-[clamp(30rem,72vh,44rem)] overflow-hidden bg-maroon-deep"
+      className="bg-maroon-deep relative h-[clamp(30rem,72vh,44rem)] overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -68,7 +68,7 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
               className="object-cover object-[60%_center]"
             />
             {/* Left-weighted scrim so the copy stays legible over a busy photo. */}
-            <div className="absolute inset-0 bg-gradient-to-r from-maroon-deep/92 via-maroon-deep/65 to-transparent" />
+            <div className="from-maroon-deep/92 via-maroon-deep/65 absolute inset-0 bg-gradient-to-r to-transparent" />
 
             <Container wide className="relative flex h-full items-center">
               <div className={cn('max-w-xl', active && 'animate-fade-up')}>
@@ -77,12 +77,12 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
                   <span className="label-caps text-gold">{slide.eyebrow}</span>
                 </div>
 
-                <h1 className="display-hero mt-5 text-[clamp(2.5rem,7vw,4.5rem)] text-cream">
+                <h1 className="display-hero text-cream mt-5 text-[clamp(2.5rem,7vw,4.5rem)]">
                   {slide.headline}
-                  <span className="block text-gold">{slide.headlineAccent}</span>
+                  <span className="text-gold block">{slide.headlineAccent}</span>
                 </h1>
 
-                <p className="mt-5 max-w-md text-sm leading-relaxed tracking-wide text-cream/80 uppercase">
+                <p className="text-cream/80 mt-5 max-w-md text-sm uppercase leading-relaxed tracking-wide">
                   {slide.subtext}
                 </p>
 
@@ -110,7 +110,7 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
               aria-current={i === index}
               className={cn(
                 'h-1 rounded-full transition-all duration-500',
-                i === index ? 'w-8 bg-gold' : 'w-4 bg-cream/40 hover:bg-cream/70',
+                i === index ? 'bg-gold w-8' : 'bg-cream/40 hover:bg-cream/70 w-4',
               )}
             />
           ))}

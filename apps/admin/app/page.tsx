@@ -30,8 +30,8 @@ export default async function DashboardPage() {
 
       <div className="p-6">
         <Alert tone="info" className="mb-6">
-          <strong>Development build.</strong> Data comes from the in-memory seed set and resets
-          when the server restarts. Changes you make here are real and appear on the storefront
+          <strong>Development build.</strong> Data comes from the in-memory seed set and resets when
+          the server restarts. Changes you make here are real and appear on the storefront
           immediately.
         </Alert>
 
@@ -63,12 +63,15 @@ export default async function DashboardPage() {
 
         <div className="mt-6 grid gap-6 xl:grid-cols-[1.4fr_1fr]">
           {/* Recent orders */}
-          <section aria-labelledby="recent" className="border border-line bg-card">
-            <div className="flex items-center justify-between border-b border-line px-5 py-4">
-              <h2 id="recent" className="font-display text-xl text-maroon">
+          <section aria-labelledby="recent" className="border-line bg-card border">
+            <div className="border-line flex items-center justify-between border-b px-5 py-4">
+              <h2 id="recent" className="font-display text-maroon text-xl">
                 Recent orders
               </h2>
-              <Link href="/orders" className="flex items-center gap-1 text-xs text-maroon hover:underline">
+              <Link
+                href="/orders"
+                className="text-maroon flex items-center gap-1 text-xs hover:underline"
+              >
                 All orders <ArrowRight className="size-3" />
               </Link>
             </div>
@@ -76,28 +79,38 @@ export default async function DashboardPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-line text-left">
-                    <th scope="col" className="label-caps px-5 py-3 text-muted">Order</th>
-                    <th scope="col" className="label-caps px-5 py-3 text-muted">Customer</th>
-                    <th scope="col" className="label-caps px-5 py-3 text-muted">Status</th>
-                    <th scope="col" className="label-caps px-5 py-3 text-right text-muted">Total</th>
+                  <tr className="border-line border-b text-left">
+                    <th scope="col" className="label-caps text-muted px-5 py-3">
+                      Order
+                    </th>
+                    <th scope="col" className="label-caps text-muted px-5 py-3">
+                      Customer
+                    </th>
+                    <th scope="col" className="label-caps text-muted px-5 py-3">
+                      Status
+                    </th>
+                    <th scope="col" className="label-caps text-muted px-5 py-3 text-right">
+                      Total
+                    </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-line">
+                <tbody className="divide-line divide-y">
                   {recentOrders.items.map((order) => (
-                    <tr key={order.id} className="transition-colors hover:bg-cream-panel/40">
+                    <tr key={order.id} className="hover:bg-cream-panel/40 transition-colors">
                       <td className="px-5 py-3">
                         <Link
                           href={`/orders/${order.orderNumber}`}
-                          className="font-mono text-xs text-maroon hover:underline"
+                          className="text-maroon font-mono text-xs hover:underline"
                         >
                           {order.orderNumber}
                         </Link>
-                        <p className="text-[0.625rem] text-muted">{formatDateTime(order.placedAt)}</p>
+                        <p className="text-muted text-[0.625rem]">
+                          {formatDateTime(order.placedAt)}
+                        </p>
                       </td>
                       <td className="px-5 py-3">
-                        <p className="text-xs text-ink">{order.shippingAddress.fullName}</p>
-                        <p className="text-[0.625rem] text-muted">{order.shippingAddress.city}</p>
+                        <p className="text-ink text-xs">{order.shippingAddress.fullName}</p>
+                        <p className="text-muted text-[0.625rem]">{order.shippingAddress.city}</p>
                       </td>
                       <td className="px-5 py-3">
                         <Badge
@@ -112,7 +125,7 @@ export default async function DashboardPage() {
                           {ORDER_STATUS_LABELS[order.status]}
                         </Badge>
                       </td>
-                      <td className="px-5 py-3 text-right text-xs tabular-nums text-ink">
+                      <td className="text-ink px-5 py-3 text-right text-xs tabular-nums">
                         {formatPaise(order.totalPaise)}
                       </td>
                     </tr>
@@ -123,29 +136,35 @@ export default async function DashboardPage() {
           </section>
 
           {/* Low stock */}
-          <section aria-labelledby="lowstock" className="border border-line bg-card">
-            <div className="flex items-center justify-between border-b border-line px-5 py-4">
-              <h2 id="lowstock" className="flex items-center gap-2 font-display text-xl text-maroon">
-                <AlertTriangle className="size-4 text-warning" aria-hidden="true" />
+          <section aria-labelledby="lowstock" className="border-line bg-card border">
+            <div className="border-line flex items-center justify-between border-b px-5 py-4">
+              <h2
+                id="lowstock"
+                className="font-display text-maroon flex items-center gap-2 text-xl"
+              >
+                <AlertTriangle className="text-warning size-4" aria-hidden="true" />
                 Needs restocking
               </h2>
-              <Link href="/inventory" className="text-xs text-maroon hover:underline">
+              <Link href="/inventory" className="text-maroon text-xs hover:underline">
                 Manage
               </Link>
             </div>
 
             {lowStock.length === 0 ? (
-              <p className="flex items-center gap-2 px-5 py-8 text-sm text-success">
+              <p className="text-success flex items-center gap-2 px-5 py-8 text-sm">
                 <PackageCheck className="size-4" aria-hidden="true" />
                 Everything is well stocked.
               </p>
             ) : (
-              <ul className="divide-y divide-line">
+              <ul className="divide-line divide-y">
                 {lowStock.slice(0, 8).map((variant) => (
-                  <li key={variant.id} className="flex items-center justify-between gap-3 px-5 py-3">
+                  <li
+                    key={variant.id}
+                    className="flex items-center justify-between gap-3 px-5 py-3"
+                  >
                     <div className="min-w-0">
-                      <p className="truncate text-xs text-ink">{variant.productTitle}</p>
-                      <p className="text-[0.625rem] text-muted">
+                      <p className="text-ink truncate text-xs">{variant.productTitle}</p>
+                      <p className="text-muted text-[0.625rem]">
                         {variant.colour} · {variant.size} · {variant.sku}
                       </p>
                     </div>
@@ -158,7 +177,7 @@ export default async function DashboardPage() {
             )}
 
             {lowStock.length > 8 && (
-              <p className="border-t border-line px-5 py-3 text-xs text-muted">
+              <p className="border-line text-muted border-t px-5 py-3 text-xs">
                 and {lowStock.length - 8} more {pluralise(lowStock.length - 8, 'variant')}
               </p>
             )}

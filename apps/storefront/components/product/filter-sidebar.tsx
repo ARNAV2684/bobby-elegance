@@ -67,8 +67,8 @@ export function FilterSidebar({ facets, total }: { facets: FacetCounts; total: n
     const active = selected(paramKey);
 
     return (
-      <fieldset className="border-t border-line py-5">
-        <legend className="label-caps mb-3 text-ink">{title}</legend>
+      <fieldset className="border-line border-t py-5">
+        <legend className="label-caps text-ink mb-3">{title}</legend>
         <div className={cn('flex', paramKey === 'colour' ? 'flex-wrap gap-2' : 'flex-col gap-2')}>
           {options.map((opt) => {
             const isOn = active.has(opt.value);
@@ -100,7 +100,7 @@ export function FilterSidebar({ facets, total }: { facets: FacetCounts; total: n
             return (
               <label
                 key={opt.value}
-                className="flex cursor-pointer items-center gap-2.5 text-sm text-ink-soft hover:text-ink"
+                className="text-ink-soft hover:text-ink flex cursor-pointer items-center gap-2.5 text-sm"
               >
                 <input
                   type="checkbox"
@@ -109,7 +109,7 @@ export function FilterSidebar({ facets, total }: { facets: FacetCounts; total: n
                   className="size-4 accent-[var(--color-maroon)]"
                 />
                 <span className="flex-1">{opt.label ?? opt.value}</span>
-                <span className="text-xs text-muted tabular-nums">{opt.count}</span>
+                <span className="text-muted text-xs tabular-nums">{opt.count}</span>
               </label>
             );
           })}
@@ -121,15 +121,15 @@ export function FilterSidebar({ facets, total }: { facets: FacetCounts; total: n
   const content = (
     <>
       <div className="flex items-center justify-between pb-4">
-        <p className="text-sm text-muted">
-          <span className="font-medium text-ink tabular-nums">{total}</span>{' '}
+        <p className="text-muted text-sm">
+          <span className="text-ink font-medium tabular-nums">{total}</span>{' '}
           {total === 1 ? 'product' : 'products'}
         </p>
         {activeCount > 0 && (
           <button
             type="button"
             onClick={clearAll}
-            className="text-xs text-maroon underline underline-offset-2 hover:no-underline"
+            className="text-maroon text-xs underline underline-offset-2 hover:no-underline"
           >
             Clear all ({activeCount})
           </button>
@@ -162,8 +162,8 @@ export function FilterSidebar({ facets, total }: { facets: FacetCounts; total: n
       />
 
       {/* Price */}
-      <fieldset className="border-t border-line py-5">
-        <legend className="label-caps mb-3 text-ink">Price</legend>
+      <fieldset className="border-line border-t py-5">
+        <legend className="label-caps text-ink mb-3">Price</legend>
         <div className="flex flex-col gap-2">
           {[5000, 10000, 15000, 30000].map((maxRupees) => {
             const value = String(maxRupees * 100);
@@ -171,7 +171,7 @@ export function FilterSidebar({ facets, total }: { facets: FacetCounts; total: n
             return (
               <label
                 key={maxRupees}
-                className="flex cursor-pointer items-center gap-2.5 text-sm text-ink-soft hover:text-ink"
+                className="text-ink-soft hover:text-ink flex cursor-pointer items-center gap-2.5 text-sm"
               >
                 <input
                   type="radio"
@@ -198,12 +198,7 @@ export function FilterSidebar({ facets, total }: { facets: FacetCounts; total: n
   return (
     <>
       {/* Mobile trigger */}
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => setMobileOpen(true)}
-        className="lg:hidden"
-      >
+      <Button variant="outline" size="sm" onClick={() => setMobileOpen(true)} className="lg:hidden">
         <SlidersHorizontal className="size-3.5" />
         Filters{activeCount > 0 && ` (${activeCount})`}
       </Button>
@@ -215,15 +210,20 @@ export function FilterSidebar({ facets, total }: { facets: FacetCounts; total: n
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label="Filters">
+        <div
+          className="fixed inset-0 z-[60] lg:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Filters"
+        >
           <div
-            className="absolute inset-0 bg-ink/40"
+            className="bg-ink/40 absolute inset-0"
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />
-          <div className="absolute inset-y-0 left-0 flex w-[85%] max-w-sm flex-col bg-cream">
-            <div className="flex items-center justify-between border-b border-line px-5 py-4">
-              <h2 className="font-display text-xl text-maroon">Filters</h2>
+          <div className="bg-cream absolute inset-y-0 left-0 flex w-[85%] max-w-sm flex-col">
+            <div className="border-line flex items-center justify-between border-b px-5 py-4">
+              <h2 className="font-display text-maroon text-xl">Filters</h2>
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
@@ -234,7 +234,7 @@ export function FilterSidebar({ facets, total }: { facets: FacetCounts; total: n
               </button>
             </div>
             <div className="flex-1 overflow-y-auto px-5">{content}</div>
-            <div className="border-t border-line p-4">
+            <div className="border-line border-t p-4">
               <Button fullWidth onClick={() => setMobileOpen(false)}>
                 Show {total} {total === 1 ? 'result' : 'results'}
               </Button>

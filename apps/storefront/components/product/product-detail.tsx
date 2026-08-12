@@ -3,13 +3,7 @@
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { Check, Minus, Plus, Ruler, ShoppingBag, Truck } from 'lucide-react';
-import {
-  SIZES,
-  discountPercent,
-  formatPaise,
-  type Product,
-  type Size,
-} from '@bobby/shared';
+import { SIZES, discountPercent, formatPaise, type Product, type Size } from '@bobby/shared';
 import { Alert, Badge, Button, cn } from '@bobby/ui';
 import { useCart } from '@/lib/cart-context';
 
@@ -79,8 +73,10 @@ export function ProductDetail({ product }: { product: Product }) {
                   aria-label={`View image ${i + 1}`}
                   aria-current={i === imageIndex}
                   className={cn(
-                    'relative block aspect-2/3 w-16 overflow-hidden border-2 transition-colors',
-                    i === imageIndex ? 'border-maroon' : 'border-transparent hover:border-line-strong',
+                    'aspect-2/3 relative block w-16 overflow-hidden border-2 transition-colors',
+                    i === imageIndex
+                      ? 'border-maroon'
+                      : 'hover:border-line-strong border-transparent',
                   )}
                 >
                   <Image src={img.url} alt="" fill sizes="64px" className="object-cover" />
@@ -90,7 +86,7 @@ export function ProductDetail({ product }: { product: Product }) {
           </ul>
         )}
 
-        <div className="relative aspect-2/3 flex-1 overflow-hidden bg-cream-panel">
+        <div className="aspect-2/3 bg-cream-panel relative flex-1 overflow-hidden">
           {active && (
             <Image
               src={active.url}
@@ -113,31 +109,31 @@ export function ProductDetail({ product }: { product: Product }) {
       <div className="flex flex-col">
         <p className="label-caps text-gold-muted">{product.workType}</p>
 
-        <h1 className="mt-2 font-display text-3xl leading-tight text-maroon sm:text-4xl">
+        <h1 className="font-display text-maroon mt-2 text-3xl leading-tight sm:text-4xl">
           {product.title}
         </h1>
 
         <p className="mt-3 flex flex-wrap items-baseline gap-3">
-          <span className="font-display text-3xl font-semibold text-maroon">
+          <span className="font-display text-maroon text-3xl font-semibold">
             {formatPaise(product.basePricePaise)}
           </span>
           {product.compareAtPaise && (
             <>
-              <span className="text-lg text-muted line-through">
+              <span className="text-muted text-lg line-through">
                 {formatPaise(product.compareAtPaise)}
               </span>
-              <span className="text-sm font-medium text-success">Save {off}%</span>
+              <span className="text-success text-sm font-medium">Save {off}%</span>
             </>
           )}
         </p>
-        <p className="mt-1 text-xs text-muted">Inclusive of all taxes</p>
+        <p className="text-muted mt-1 text-xs">Inclusive of all taxes</p>
 
-        <p className="mt-5 text-sm leading-relaxed text-ink-soft">{product.summary}</p>
+        <p className="text-ink-soft mt-5 text-sm leading-relaxed">{product.summary}</p>
 
         {/* Colour */}
         {colours.length > 1 && (
           <fieldset className="mt-7">
-            <legend className="label-caps mb-3 text-ink">
+            <legend className="label-caps text-ink mb-3">
               Colour: <span className="text-muted">{colour}</span>
             </legend>
             <div className="flex gap-2.5">
@@ -172,11 +168,11 @@ export function ProductDetail({ product }: { product: Product }) {
 
         {/* Size */}
         <fieldset className="mt-6">
-          <legend className="label-caps mb-3 flex w-full items-center justify-between text-ink">
+          <legend className="label-caps text-ink mb-3 flex w-full items-center justify-between">
             <span>Size {size && <span className="text-muted">: {size}</span>}</span>
             <a
               href="/size-guide"
-              className="flex items-center gap-1 text-[0.625rem] text-maroon normal-case hover:underline"
+              className="text-maroon flex items-center gap-1 text-[0.625rem] normal-case hover:underline"
             >
               <Ruler className="size-3" />
               Size guide
@@ -205,7 +201,7 @@ export function ProductDetail({ product }: { product: Product }) {
                     // A sold-out size stays visible but struck through — hiding it
                     // makes shoppers think we never stocked it.
                     out &&
-                      'cursor-not-allowed border-line/60 text-muted/50 line-through hover:border-line/60',
+                      'border-line/60 text-muted/50 hover:border-line/60 cursor-not-allowed line-through',
                   )}
                 >
                   {s}
@@ -215,7 +211,7 @@ export function ProductDetail({ product }: { product: Product }) {
           </div>
 
           {selected && selected.stock > 0 && selected.stock <= 3 && (
-            <p className="mt-2.5 text-xs text-warning">
+            <p className="text-warning mt-2.5 text-xs">
               Only {selected.stock} left in {colour}, size {selected.size}
             </p>
           )}
@@ -223,13 +219,13 @@ export function ProductDetail({ product }: { product: Product }) {
 
         {/* Quantity + add */}
         <div className="mt-7 flex flex-wrap items-center gap-3">
-          <div className="flex items-center border border-line">
+          <div className="border-line flex items-center border">
             <button
               type="button"
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
               disabled={quantity <= 1}
               aria-label="Decrease quantity"
-              className="flex size-11 items-center justify-center text-ink hover:bg-cream-panel disabled:opacity-40"
+              className="text-ink hover:bg-cream-panel flex size-11 items-center justify-center disabled:opacity-40"
             >
               <Minus className="size-3.5" />
             </button>
@@ -241,18 +237,13 @@ export function ProductDetail({ product }: { product: Product }) {
               onClick={() => setQuantity((q) => Math.min(10, selected?.stock ?? 10, q + 1))}
               disabled={!selected || quantity >= Math.min(10, selected.stock)}
               aria-label="Increase quantity"
-              className="flex size-11 items-center justify-center text-ink hover:bg-cream-panel disabled:opacity-40"
+              className="text-ink hover:bg-cream-panel flex size-11 items-center justify-center disabled:opacity-40"
             >
               <Plus className="size-3.5" />
             </button>
           </div>
 
-          <Button
-            size="lg"
-            onClick={handleAdd}
-            disabled={soldOut}
-            className="min-w-52 flex-1"
-          >
+          <Button size="lg" onClick={handleAdd} disabled={soldOut} className="min-w-52 flex-1">
             {added ? (
               <>
                 <Check className="size-4" /> Added to bag
@@ -268,22 +259,22 @@ export function ProductDetail({ product }: { product: Product }) {
         </div>
 
         {error && (
-          <p role="alert" className="mt-3 text-sm text-danger">
+          <p role="alert" className="text-danger mt-3 text-sm">
             {error}
           </p>
         )}
 
         {soldOut && (
           <Alert tone="warning" className="mt-4">
-            This piece is sold out online. Call us on 75060 00091 — our Mira Road stores may
-            still have it.
+            This piece is sold out online. Call us on 75060 00091 — our Mira Road stores may still
+            have it.
           </Alert>
         )}
 
         {/* Delivery promise */}
-        <div className="mt-7 flex items-start gap-3 border-y border-line py-4">
-          <Truck className="mt-0.5 size-4 shrink-0 text-gold-muted" aria-hidden="true" />
-          <p className="text-xs leading-relaxed text-ink-soft">
+        <div className="border-line mt-7 flex items-start gap-3 border-y py-4">
+          <Truck className="text-gold-muted mt-0.5 size-4 shrink-0" aria-hidden="true" />
+          <p className="text-ink-soft text-xs leading-relaxed">
             Free shipping on orders over ₹1,999 · Cash on delivery available
             <br />
             <span className="text-muted">Dispatched in 2–3 working days from Mira Road</span>
@@ -294,22 +285,22 @@ export function ProductDetail({ product }: { product: Product }) {
         <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
           <div>
             <dt className="label-caps text-muted">Fabric</dt>
-            <dd className="mt-0.5 text-ink">{product.fabric}</dd>
+            <dd className="text-ink mt-0.5">{product.fabric}</dd>
           </div>
           <div>
             <dt className="label-caps text-muted">Work</dt>
-            <dd className="mt-0.5 text-ink">{product.workType}</dd>
+            <dd className="text-ink mt-0.5">{product.workType}</dd>
           </div>
         </dl>
 
-        <details className="mt-6 border-t border-line pt-4" open>
-          <summary className="label-caps cursor-pointer text-ink">Description</summary>
-          <p className="mt-3 text-sm leading-relaxed text-ink-soft">{product.description}</p>
+        <details className="border-line mt-6 border-t pt-4" open>
+          <summary className="label-caps text-ink cursor-pointer">Description</summary>
+          <p className="text-ink-soft mt-3 text-sm leading-relaxed">{product.description}</p>
         </details>
 
-        <details className="mt-3 border-t border-line pt-4">
-          <summary className="label-caps cursor-pointer text-ink">Care instructions</summary>
-          <ul className="mt-3 list-inside list-disc space-y-1 text-sm text-ink-soft">
+        <details className="border-line mt-3 border-t pt-4">
+          <summary className="label-caps text-ink cursor-pointer">Care instructions</summary>
+          <ul className="text-ink-soft mt-3 list-inside list-disc space-y-1 text-sm">
             {product.careInstructions.map((c) => (
               <li key={c}>{c}</li>
             ))}

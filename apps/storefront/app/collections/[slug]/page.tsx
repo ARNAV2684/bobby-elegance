@@ -87,7 +87,7 @@ export default async function CollectionPage({
       <Container wide>
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex items-center gap-2 text-xs text-muted">
+          <ol className="text-muted flex items-center gap-2 text-xs">
             <li>
               <Link href="/" className="hover:text-maroon">
                 Home
@@ -117,8 +117,8 @@ export default async function CollectionPage({
           <FilterSidebar facets={facets} total={result.total} />
 
           <div className="min-w-0 flex-1">
-            <div className="mb-6 flex items-center justify-between gap-4 border-b border-line pb-4">
-              <p className="hidden text-sm text-muted lg:block">
+            <div className="border-line mb-6 flex items-center justify-between gap-4 border-b pb-4">
+              <p className="text-muted hidden text-sm lg:block">
                 Showing{' '}
                 <span className="text-ink tabular-nums">
                   {result.items.length ? (result.page - 1) * result.pageSize + 1 : 0}–
@@ -137,7 +137,10 @@ export default async function CollectionPage({
                 title="Nothing matches those filters"
                 description="Try removing a filter or two — or browse the full collection."
                 action={
-                  <Link href={`/collections/${slug}`} className={buttonClasses({ variant: 'primary' })}>
+                  <Link
+                    href={`/collections/${slug}`}
+                    className={buttonClasses({ variant: 'primary' })}
+                  >
                     Clear filters
                   </Link>
                 }

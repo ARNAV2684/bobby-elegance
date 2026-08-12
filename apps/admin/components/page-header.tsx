@@ -10,10 +10,10 @@ export function PageHeader({
   actions?: ReactNode;
 }) {
   return (
-    <header className="flex flex-wrap items-end justify-between gap-4 border-b border-line bg-card px-6 py-5">
+    <header className="border-line bg-card flex flex-wrap items-end justify-between gap-4 border-b px-6 py-5">
       <div>
-        <h1 className="font-display text-2xl text-maroon">{title}</h1>
-        {subtitle && <p className="mt-0.5 text-sm text-muted">{subtitle}</p>}
+        <h1 className="font-display text-maroon text-2xl">{title}</h1>
+        {subtitle && <p className="text-muted mt-0.5 text-sm">{subtitle}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
     </header>
@@ -39,12 +39,12 @@ export function StatCard({
   } as const;
 
   return (
-    <div className="border border-line bg-card p-5">
+    <div className="border-line bg-card border p-5">
       <p className="label-caps text-muted">{label}</p>
-      <p className={`mt-2 font-display text-3xl font-semibold tabular-nums ${tones[tone]}`}>
+      <p className={`font-display mt-2 text-3xl font-semibold tabular-nums ${tones[tone]}`}>
         {value}
       </p>
-      {hint && <p className="mt-1 text-xs text-muted">{hint}</p>}
+      {hint && <p className="text-muted mt-1 text-xs">{hint}</p>}
     </div>
   );
 }

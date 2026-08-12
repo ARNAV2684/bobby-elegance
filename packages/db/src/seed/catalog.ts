@@ -67,8 +67,7 @@ export const CATEGORIES: Category[] = [
     id: 'cat-kurti',
     slug: 'kurti-sets',
     name: 'Kurti Sets',
-    description:
-      'Relaxed, refined, and endlessly wearable. Our most repeat-purchased category.',
+    description: 'Relaxed, refined, and endlessly wearable. Our most repeat-purchased category.',
     parentSlug: null,
     imageUrl: '/images/collections/kurti-sets.jpg',
     position: 6,

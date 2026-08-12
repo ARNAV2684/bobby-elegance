@@ -38,12 +38,12 @@ export default function TrackLookupPage() {
       <Container>
         <div className="mx-auto max-w-md">
           <div className="flex flex-col items-center text-center">
-            <span className="flex size-14 items-center justify-center rounded-full border border-gold-muted/40 text-gold-muted">
+            <span className="border-gold-muted/40 text-gold-muted flex size-14 items-center justify-center rounded-full border">
               <Package className="size-6" aria-hidden="true" />
             </span>
-            <h1 className="mt-5 font-display text-3xl text-maroon">Track your order</h1>
+            <h1 className="font-display text-maroon mt-5 text-3xl">Track your order</h1>
             <Ornament className="mt-3" />
-            <p className="mt-4 text-sm text-muted">
+            <p className="text-muted mt-4 text-sm">
               Enter the order number from your confirmation email.
             </p>
           </div>
@@ -75,7 +75,7 @@ export default function TrackLookupPage() {
             <code>BE4TP82NRH</code> (shipped), <code>BE2XW5JD7F</code> (packed).
           </Alert>
 
-          <p className="mt-6 text-center text-xs text-muted">
+          <p className="text-muted mt-6 text-center text-xs">
             Lost your order number? Call us on{' '}
             <a href={`tel:+91${BRAND.contact.phone}`} className="text-maroon hover:underline">
               {BRAND.contact.phoneDisplay}
